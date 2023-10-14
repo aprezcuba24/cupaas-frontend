@@ -1,25 +1,23 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { isAuthenticated } from '@/services/auth';
 
 const NOT_SECURE = ['/auth']
  
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  if (pathname === '/') {
-    return
-  }
   const found = NOT_SECURE.find((path) => pathname.startsWith(path))
-  const token = request.cookies.get('token')
-  if (found && token) {
+  const isAuth = await isAuthenticated()
+  if (found && isAuth) {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
-  if (!found && !token) {
+  if (!found && !isAuth) {
     return NextResponse.redirect(new URL('/auth/login', request.url))
   }
 }
  
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico).+)',
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 }
