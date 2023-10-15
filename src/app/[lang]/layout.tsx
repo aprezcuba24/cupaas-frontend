@@ -1,6 +1,7 @@
-import './globals.css'
+// import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import ThemeRegister from '@/components/ThemeRegister'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,7 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full bg-white">
-      <body className={inter.className}>{children}</body>
+      <ThemeRegister>
+        <body className={inter.className}>{children}</body>
+      </ThemeRegister>
     </html>
   )
 }

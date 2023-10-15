@@ -1,6 +1,7 @@
 import { login } from '@/services/auth'
 import { redirect } from 'next/navigation'
 import { getDictionary, Keys } from '@/utils/get_dictionaries'
+import { Button, Typography, TextField, Box } from '@mui/material';
 
 
 type PageParams = {
@@ -18,55 +19,51 @@ export default async function Page({ params: { lang } }: PageParams) {
   }
  
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img className="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company"/>
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          {t.sign_in.title}
-        </h2>
-      </div>
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <Box pt={12} px={3}>
+      <Typography variant="h5" textAlign='center' fontWeight='bold'>
+        {t.sign_in.title}
+      </Typography>
+      <Box mt={10} mx='auto' sx={{ width: { xs: '100%', md: '25%' } }}>
         <form action={create}>
-          <div className='mb-5'>
-            <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-              {t.sign_in.email}
-            </label>
-            <div className="mt-2">
-              <input id="email" name="username" type="email" autoComplete="email" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
-          <div className='mb-5'>
-            <div className="flex items-center justify-between">
-              <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                {t.sign_in.password}
-              </label>
-              <div className="text-sm">
-                <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                  {t.sign_in.forgot_password}
-                </a>
-              </div>
-            </div>
-            <div className="mt-2">
-              <input id="password" name="password" type="password" autoComplete="current-password" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              {t.sign_in.btn}
-            </button>
-          </div>
+          <Box mb={5}>
+            <TextField
+              label={t.sign_in.email}
+              variant="outlined"
+              size="small"
+              name="username"
+              type="email"
+              sx={{width: '100%'}}
+              required
+              autoComplete="email"
+            />
+          </Box>
+          <Box mb={5}>
+            <Box mt={2}>
+              <TextField
+                label={t.sign_in.password}
+                variant="outlined"
+                size="small"
+                name="password"
+                type="password"
+                sx={{width: '100%'}}
+                required
+                autoComplete="current-password"
+              />
+            </Box>
+          </Box>
+          <Button variant="contained" sx={{width: '100%'}} type='submit'>
+            {t.sign_in.btn}
+          </Button>
         </form>
-
-        <p className="mt-10 text-center text-sm text-gray-500">
-          <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+        <Box mt={5} sx={{ display: 'flex', flexDirection: 'column' }}>
+          <a href="#">
             {t.sign_in.register}
           </a>
-        </p>
-      </div>
-    </div>
+          <a href="#">
+            {t.sign_in.forgot_password}
+          </a>
+        </Box>
+      </Box>
+    </Box>
   )
 }
