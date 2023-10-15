@@ -1,0 +1,10 @@
+{
+  "sign_in": {
+    "title": "Acceda a su cuenta",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "forgot_password": "¿Olvidó la contraseña?",
+    "btn": "Acceder",
+    "register": "Crear una cuenta"
+  }
+}

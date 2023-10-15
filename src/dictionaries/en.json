@@ -1,0 +1,10 @@
+{
+  "sign_in": {
+    "title": "Sign in to your account",
+    "email": "Email address",
+    "password": "Password",
+    "forgot_password": "Forgot password?",
+    "btn": "Sign in",
+    "register": "Create an account"
+  }
+}
