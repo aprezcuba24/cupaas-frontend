@@ -6,5 +6,12 @@
     "forgot_password": "¿Olvidó la contraseña?",
     "btn": "Acceder",
     "register": "Crear una cuenta"
+  },
+  "register": {
+    "title": "Crear una cuenta",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "btn": "Crear",
+    "login": "Acceder"
   }
 }

@@ -6,5 +6,12 @@
     "forgot_password": "Forgot password?",
     "btn": "Sign in",
     "register": "Create an account"
+  },
+  "register": {
+    "title": "Create an account",
+    "email": "Email address",
+    "password": "Password",
+    "btn": "Create",
+    "login": "Sign in"
   }
 }
