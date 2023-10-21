@@ -13,5 +13,6 @@
     "name": "Nombre",
     "btn": "Crear",
     "login": "Acceder"
-  }
+  },
+  "confirmation": "Un correo electrónico fue enviado a su dirección de correo electrónico. Por favor, confirme su cuenta."
 }

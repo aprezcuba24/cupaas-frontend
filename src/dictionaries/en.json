@@ -13,5 +13,6 @@
     "name": "Name",
     "btn": "Create",
     "login": "Sign in"
-  }
+  },
+  "confirmation": "An email was sent to your email address. Please confirm your account."
 }
