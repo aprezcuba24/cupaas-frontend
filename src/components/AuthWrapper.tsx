@@ -1,9 +1,10 @@
 'use client'
 import { ReactNode } from 'react';
-import { Button, Typography, Box } from '@mui/material';
+import { Typography, Box } from '@mui/material';
+import BtnSubmit from './Form/BtnSubmit';
 
 type Props = {
-  create: (formData: FormData) => Promise<void>;
+  create: (formData: FormData) => Promise<void> | void;
   title: string;
   btn: string;
   footer: ReactNode,
@@ -29,9 +30,9 @@ export default function AuthWrapper({
               {item}
             </Box>
           )) : children}
-          <Button variant="contained" sx={{width: '100%'}} type='submit'>
+          <BtnSubmit variant="contained" sx={{width: '100%'}}>
             {btn}
-          </Button>
+          </BtnSubmit>
         </form>
         <Box mt={5} sx={{ display: 'flex', justifyContent: 'space-between' }}>
           {footer}

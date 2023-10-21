@@ -8,3 +8,5 @@ const dictionaries = {
 }
  
 export const getDictionary = async (locale: Keys) => dictionaries[locale]()
+
+export type Dictionary = Awaited<ReturnType<typeof getDictionary>>;

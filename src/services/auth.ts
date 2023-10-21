@@ -1,12 +1,14 @@
 'use server'
-
 import { request } from '@/utils/request'
 import { cookies } from 'next/headers'
 
 export const login = async (formData: FormData) => {
   const response = await request('POST', '/auth-token/', formData)
-  const { token } = await response.json();
-  cookies().set('token', token)
+  if (response instanceof Response) {
+    const { token } = await (response as Response).json();
+    cookies().set('token', token)
+  }
+  return response
 }
 
 export const isAuthenticated  = async () => {
@@ -15,4 +17,8 @@ export const isAuthenticated  = async () => {
 
 export const logout = async () => {
   return cookies().delete('token')
+}
+
+export const createAccount = async (formData: FormData) => {
+  return request('POST', '/api/users/', formData)
 }

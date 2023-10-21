@@ -8,5 +8,10 @@ export const request = async (method: string, path: string, data: any = null) =>
       "Content-Type": "application/json",
     },
   })
-  return response
+  if (response.ok) {
+    return response
+  }
+  return {
+    errors: await response.json()
+  }
 }

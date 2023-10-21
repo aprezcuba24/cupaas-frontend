@@ -10,7 +10,7 @@
   "register": {
     "title": "Create an account",
     "email": "Email address",
-    "password": "Password",
+    "name": "Name",
     "btn": "Create",
     "login": "Sign in"
   }

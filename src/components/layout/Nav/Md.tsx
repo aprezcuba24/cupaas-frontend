@@ -1,4 +1,4 @@
-import { LogoutBtn } from '@/components/BtnLogout'
+import { LogoutBtn } from '@/components/Form/BtnLogout'
 import Image from 'next/image'
 
 
