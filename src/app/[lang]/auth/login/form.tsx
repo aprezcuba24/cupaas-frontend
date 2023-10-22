@@ -17,10 +17,10 @@ export default function Form({ t, action }: Props) {
 
   const footer = (
     <>
-      <Link href='register'>
+      <Link href='/auth/register'>
         {t.sign_in.register}
       </Link>
-      <Link href='change-password'>
+      <Link href='/auth/change-password'>
         {t.sign_in.forgot_password}
       </Link>
     </>

@@ -3,6 +3,7 @@ import { PropsWithChildren } from 'react'
 import BaseLink, { LinkProps } from 'next/link';
 import styled from '@emotion/styled';
 import { colors } from '@mui/material'
+import { useParams } from 'next/navigation'
 
 const LinkStyled = styled(BaseLink)`
   color: ${colors.indigo[600]};
@@ -15,8 +16,9 @@ const LinkStyled = styled(BaseLink)`
 
 type Props = LinkProps & PropsWithChildren
 
-export default function Link({ children, ...props }: Props) {
+export default function Link({ children, href, ...props }: Props) {
+  const { lang } = useParams()
   return (
-    <LinkStyled {...props}>{children}</LinkStyled>
+    <LinkStyled href={`/${lang}${href}`} {...props}>{children}</LinkStyled>
   )
 }

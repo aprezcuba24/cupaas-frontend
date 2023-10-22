@@ -17,7 +17,7 @@ export default function Form({ t, action }: Props) {
 
   const footer = (
     <>
-      <Link href='login'>
+      <Link href='/auth/login'>
         {t.change_password.login}
       </Link>
     </>

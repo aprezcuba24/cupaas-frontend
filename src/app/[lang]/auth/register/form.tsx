@@ -15,7 +15,7 @@ export default function Form({ t, action }: Props) {
   const [ { errors }, formAction ] = useServerForm(action);
 
   const footer = (
-    <Link href='login'>
+    <Link href='/auth/login'>
       {t.register.login}
     </Link>
   )
