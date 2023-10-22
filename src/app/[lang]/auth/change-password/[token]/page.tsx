@@ -21,12 +21,12 @@ const ChangePasswordSchema = z.object({
 
 type Props = {
   params: Lang & {
-    tokens: string[]
+    token: string
   }
 }
 
-export default async function Page({ params: { lang, tokens } }: Props) {
-  const token = tokens && tokens[0]
+export default async function Page({ params: { lang, token } }: Props) {
+  console.log(token);
   const t = await getDictionary(lang)
   async function create(prevState: any, formData: FormData) {
     'use server'
