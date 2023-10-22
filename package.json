@@ -19,7 +19,8 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.3.3",
+    "zod": "^3.23.0-canary.20231004T224911"
   },
   "devDependencies": {
     "@types/node": "latest",

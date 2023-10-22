@@ -14,5 +14,12 @@
     "btn": "Crear",
     "login": "Acceder"
   },
-  "confirmation": "Un correo electrónico fue enviado a su dirección de correo electrónico. Por favor, confirme su cuenta."
+  "confirmation": "Un correo electrónico fue enviado a su dirección de correo electrónico. Por favor, confirme su cuenta.",
+  "change_password": {
+    "login": "Acceder",
+    "title": "Cambiar contraseña",
+    "btn": "Cambiar",
+    "new_password": "Nueva contraseña",
+    "repeat_password": "Repetir contraseña"
+  }
 }

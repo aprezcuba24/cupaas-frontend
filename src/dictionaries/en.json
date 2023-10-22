@@ -14,5 +14,12 @@
     "btn": "Create",
     "login": "Sign in"
   },
-  "confirmation": "An email was sent to your email address. Please confirm your account."
+  "confirmation": "An email was sent to your email address. Please confirm your account.",
+  "change_password": {
+    "login": "Sign in",
+    "title": "Change password",
+    "btn": "Change it",
+    "new_password": "New password",
+    "repeat_password": "Repeat password"
+  }
 }

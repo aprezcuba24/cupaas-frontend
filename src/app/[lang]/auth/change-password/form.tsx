@@ -1,10 +1,11 @@
 'use client'
-import { useServerForm, Action } from '@/hooks/useServerForm';
+import { Dictionary } from '@/utils/get_dictionaries';
+import { Action, useServerForm } from '@/hooks/useServerForm';
+import Link from '@/components/Link';
 import WrapperAuth from '@/components/AuthWrapper';
 import { TextField } from '@mui/material';
-import { Dictionary } from '@/utils/get_dictionaries';
-import Link from '@/components/Link';
 import FormControl from '@/components/Form/FormControl';
+import GlobalError from '@/components/Form/GlobalError';
 
 type Props = {
   t: Dictionary,
@@ -15,36 +16,40 @@ export default function Form({ t, action }: Props) {
   const [ { errors }, formAction ] = useServerForm(action);
 
   const footer = (
-    <Link href='login'>
-      {t.register.login}
-    </Link>
+    <>
+      <Link href='login'>
+        {t.change_password.login}
+      </Link>
+    </>
   )
 
   return (
     <WrapperAuth
       create={formAction}
-      title={t.register.title}
-      btn={t.register.btn}
+      title={t.change_password.title}
+      btn={t.change_password.btn}
       footer={footer}
     >
-      <FormControl error={errors?.name}>
+      <GlobalError errors={errors}/>
+      <FormControl error={errors?.password}>
         <TextField
-          label={t.register.name}
+          label={t.change_password.new_password}
           variant="outlined"
           size="small"
-          name="name"
-          type="text"
+          name="password"
+          type="password"
           sx={{width: '100%'}}
           required
+          autoComplete="email"
         />
       </FormControl>
-      <FormControl error={errors?.email}>
+      <FormControl error={errors?.repeat_password}>
         <TextField
-          label={t.register.email}
+          label={t.change_password.repeat_password}
           variant="outlined"
           size="small"
-          name="email"
-          type="email"
+          name="repeat_password"
+          type="password"
           sx={{width: '100%'}}
           required
           autoComplete="email"

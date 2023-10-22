@@ -22,3 +22,7 @@ export const logout = async () => {
 export const createAccount = async (formData: FormData) => {
   return request('POST', '/api/users/', formData)
 }
+
+export const changePassword = async (formData: FormData) => {
+  return request('POST', '/api/users/change-password/', formData)
+}

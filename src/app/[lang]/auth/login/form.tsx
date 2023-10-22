@@ -5,7 +5,7 @@ import Link from '@/components/Link';
 import WrapperAuth from '@/components/AuthWrapper';
 import { TextField } from '@mui/material';
 import FormControl from '@/components/Form/FormControl';
-import GlobalError from '../../../../components/Form/GlobalError';
+import GlobalError from '@/components/Form/GlobalError';
 
 type Props = {
   t: Dictionary,
@@ -17,10 +17,10 @@ export default function Form({ t, action }: Props) {
 
   const footer = (
     <>
-      <Link href='/auth/register'>
+      <Link href='register'>
         {t.sign_in.register}
       </Link>
-      <Link href="#">
+      <Link href='change-password'>
         {t.sign_in.forgot_password}
       </Link>
     </>
