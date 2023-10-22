@@ -21,5 +21,11 @@
     "btn": "Change it",
     "new_password": "New password",
     "repeat_password": "Repeat password"
+  },
+  "send_password_recover": {
+    "login": "Sign in",
+    "title": "Send email to recover password",
+    "btn": "Send",
+    "email": "Email"
   }
 }

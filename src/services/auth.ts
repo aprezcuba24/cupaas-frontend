@@ -28,3 +28,7 @@ export const changePassword = async (formData: FormData, token: string) => {
     'Authorization': `Token ${token}`
   })
 }
+
+export const sendEmailRecover = async (formData: FormData) => {
+  return request('POST', '/api/users/send-password-recover/', formData)
+}

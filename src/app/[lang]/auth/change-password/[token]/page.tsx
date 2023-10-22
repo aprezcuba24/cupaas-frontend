@@ -1,4 +1,4 @@
-import { PageParams, Lang } from '@/utils/types';
+import { Lang } from '@/utils/types';
 import { getDictionary } from '@/utils/get_dictionaries';
 import { changePassword } from '@/services/auth';
 import { redirect } from 'next/navigation';
@@ -26,7 +26,6 @@ type Props = {
 }
 
 export default async function Page({ params: { lang, token } }: Props) {
-  console.log(token);
   const t = await getDictionary(lang)
   async function create(prevState: any, formData: FormData) {
     'use server'

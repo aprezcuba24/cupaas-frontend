@@ -21,5 +21,11 @@
     "btn": "Cambiar",
     "new_password": "Nueva contraseña",
     "repeat_password": "Repetir contraseña"
+  },
+  "send_password_recover": {
+    "login": "Acceder",
+    "title": "Enviar email para recupear contraseña",
+    "btn": "Enviar",
+    "email": "Correo elctrónico"
   }
 }
