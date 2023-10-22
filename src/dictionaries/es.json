@@ -20,7 +20,8 @@
     "title": "Cambiar contraseña",
     "btn": "Cambiar",
     "new_password": "Nueva contraseña",
-    "repeat_password": "Repetir contraseña"
+    "repeat_password": "Repetir contraseña",
+    "message": "Su contraseña ha sido cambiada con éxito."
   },
   "send_password_recover": {
     "login": "Acceder",

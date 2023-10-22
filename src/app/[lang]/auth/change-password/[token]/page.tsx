@@ -35,7 +35,7 @@ export default async function Page({ params: { lang, token } }: Props) {
     }
     const response = await changePassword(formData, token)
     if (response instanceof Response) {
-      return redirect(`/${lang}`)
+      return redirect(`/${lang}/auth/change-password/message`)
     }
     return response;
   }

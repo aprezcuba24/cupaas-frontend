@@ -5,7 +5,7 @@ import { cookies } from 'next/headers'
 export const login = async (formData: FormData) => {
   const response = await request('POST', '/auth-token/', formData)
   if (response instanceof Response) {
-    const { token } = await (response as Response).json();
+    const { token } = await response.json();
     cookies().set('token', token)
   }
   return response
@@ -29,6 +29,6 @@ export const changePassword = async (formData: FormData, token: string) => {
   })
 }
 
-export const sendEmailRecover = async (formData: FormData) => {
-  return request('POST', '/api/users/send-password-recover/', formData)
+export const sendEmailRecover = (formData: FormData) => {
+  return request('POST', '/api/users/send-recover-password/', formData)
 }
