@@ -1,4 +1,4 @@
-import { PageParams } from '@/utils/types';
+import { PageParams, Lang } from '@/utils/types';
 import { getDictionary } from '@/utils/get_dictionaries';
 import { changePassword } from '@/services/auth';
 import { redirect } from 'next/navigation';
@@ -19,7 +19,14 @@ const ChangePasswordSchema = z.object({
   }
 );
 
-export default async function Page({ params: { lang } }: PageParams) {
+type Props = {
+  params: Lang & {
+    tokens: string[]
+  }
+}
+
+export default async function Page({ params: { lang, tokens } }: Props) {
+  const token = tokens && tokens[0]
   const t = await getDictionary(lang)
   async function create(prevState: any, formData: FormData) {
     'use server'
@@ -27,7 +34,7 @@ export default async function Page({ params: { lang } }: PageParams) {
     if (!isValid) {
       return errors;
     }
-    const response = await changePassword(formData)
+    const response = await changePassword(formData, token)
     if (response instanceof Response) {
       return redirect(`/${lang}`)
     }
