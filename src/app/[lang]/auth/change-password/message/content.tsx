@@ -1,13 +1,8 @@
 'use client'
-import { Box, Typography, styled } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { Dictionary } from '@/utils/get_dictionaries';
 import Link from '@/components/Link';
-
-const BoxMessage = styled(Box)`
-  background: rgb(255, 238, 205);
-  color: rgb(84, 101, 111);
-  border-radius: 10px;
-`
+import BoxMessage from '@/components/BoxMessage';
 
 type Props = {
   t: Dictionary,
