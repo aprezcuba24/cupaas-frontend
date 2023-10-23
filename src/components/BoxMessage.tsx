@@ -1,4 +1,5 @@
-import { styled, Box, colors } from '@mui/material';
+import { Box, colors } from '@mui/material';
+import { styled } from "@mui/material/styles";
 
 const BoxMessage = styled(Box)`
   background: ${colors.blue[800]};

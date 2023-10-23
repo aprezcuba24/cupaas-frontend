@@ -1,3 +1,4 @@
+import '@/app/[lang]/globals.css'
 import { Suspense } from 'react'
 import Nav from '@/components/layout/Nav'
 

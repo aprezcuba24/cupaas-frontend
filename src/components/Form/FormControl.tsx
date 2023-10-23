@@ -1,4 +1,5 @@
-import { FormControl as BaseFormControl, FormControlProps, styled, FormHelperText } from '@mui/material';
+import { FormControl as BaseFormControl, FormControlProps, FormHelperText } from '@mui/material';
+import { styled } from "@mui/material/styles";
 
 const FormRow = styled(BaseFormControl)`
   display: flex;

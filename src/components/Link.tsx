@@ -1,9 +1,9 @@
 'use client'
 import { PropsWithChildren } from 'react'
 import BaseLink, { LinkProps } from 'next/link';
-import styled from '@emotion/styled';
 import { colors } from '@mui/material'
 import { useParams } from 'next/navigation'
+import { styled } from "@mui/material/styles";
 
 const LinkStyled = styled(BaseLink)`
   color: ${colors.indigo[600]};

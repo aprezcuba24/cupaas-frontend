@@ -1,5 +1,6 @@
 import { Errors } from '@/hooks/useServerForm';
-import { FormHelperText as BaseFormHelperText, styled } from '@mui/material';
+import { FormHelperText as BaseFormHelperText } from '@mui/material';
+import { styled } from "@mui/material/styles";
 
 const FormHelperText = styled(BaseFormHelperText)`
   color: red;
