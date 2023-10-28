@@ -1,4 +1,4 @@
-import { experimental_useFormState as useFormState } from 'react-dom';
+import { useFormState } from 'react-dom';
 
 export type Errors = {
   errors: any;
