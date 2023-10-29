@@ -1,9 +1,10 @@
+import { setLanguage, Keys } from './../get_dictionaries'
 import type { NextRequest } from 'next/server'
 import { match } from '@formatjs/intl-localematcher'
 import Negotiator from 'negotiator'
 
-const locales = ['en', 'es']
-const defaultLocale = 'es'
+const locales: Keys[] = ['en', 'es']
+const defaultLocale: Keys = 'es'
 
 export default async function language(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -13,7 +14,8 @@ export default async function language(request: NextRequest) {
   if (pathnameHasLocale) return
   const headers = { 'accept-language': 'en-US,en;q=0.5' }
   const languages = new Negotiator({ headers }).languages()
-  const locale = match(languages, locales, defaultLocale)
+  const locale: Keys = match(languages, locales, defaultLocale) as Keys
+  setLanguage(locale)
   request.nextUrl.pathname = `/${locale}${pathname}`
   return Response.redirect(request.nextUrl)
 }

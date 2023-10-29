@@ -1,10 +1,9 @@
 import Logo from '@/components/layout/Logo';
 import UserSetting from '../right';
 import Menu from './Menu';
-import { Dictionary } from '@/utils/get_dictionaries';
 
 
-export default function NavMd({ t }: { t: Dictionary}) {
+export default function NavMd() {
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
@@ -16,7 +15,7 @@ export default function NavMd({ t }: { t: Dictionary}) {
           </div>
           <div className="hidden md:block">
             <div className="ml-4 flex items-center md:ml-6">
-              <UserSetting t={t} />
+              <UserSetting />
             </div>
           </div>
           <div className="-mr-2 flex md:hidden">

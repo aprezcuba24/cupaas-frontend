@@ -10,3 +10,9 @@ const dictionaries = {
 export const getDictionary = async (locale: Keys) => dictionaries[locale]()
 
 export type Dictionary = Awaited<ReturnType<typeof getDictionary>>;
+
+let singletonLang: Keys = 'es'
+
+export const setLanguage = (lang: Keys) => singletonLang = lang;
+
+export const getCurrentDictionary = () => getDictionary(singletonLang);

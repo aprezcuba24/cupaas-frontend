@@ -1,11 +1,10 @@
 import NavMd from "./Md"
 import MobileNav from "./Mobile"
-import { Dictionary } from '@/utils/get_dictionaries';
 
-export default function Nav({ t }: { t: Dictionary}){
+export default function Nav(){
   return (
     <nav className="bg-blue-800">
-      <NavMd t={t} />
+      <NavMd/>
       <MobileNav />
     </nav>
   )

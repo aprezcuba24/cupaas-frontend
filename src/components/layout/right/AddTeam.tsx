@@ -1,5 +1,5 @@
 import AddIcon from '@mui/icons-material/Add';
-import { Dictionary } from '@/utils/get_dictionaries';
+import { getCurrentDictionary } from '@/utils/get_dictionaries';
 import {
   Dialog,
   DialogContent,
@@ -10,7 +10,8 @@ import {
 } from "@/components/ui/dialog"
 
 
-export default function AddTeam({ t }: { t: Dictionary}) {
+export default async function AddTeam() {
+  const t = await getCurrentDictionary()
   return (
     <div className='flex items-center'>
       <Dialog>

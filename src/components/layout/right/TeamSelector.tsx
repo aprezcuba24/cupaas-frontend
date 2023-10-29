@@ -7,9 +7,8 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import AddOption from './AddTeam'
-import { Dictionary } from '@/utils/get_dictionaries';
 
-export default function TeamSelector({ t, currentTeam, teams }: { t: Dictionary, currentTeam: Team, teams: Team[]}) {
+export default function TeamSelector({ currentTeam, teams }: { currentTeam: Team, teams: Team[]}) {
   return (
     <div className='flex'>
       <div className='mr-1'>
@@ -22,7 +21,7 @@ export default function TeamSelector({ t, currentTeam, teams }: { t: Dictionary,
           </SelectContent>
         </Select>
       </div>
-      <AddOption t={t}/>
+      <AddOption/>
     </div>
   );
 }
