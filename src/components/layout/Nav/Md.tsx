@@ -1,15 +1,20 @@
 import Logo from '@/components/layout/Logo';
 import UserSetting from '../right';
 import Menu from './Menu';
+import Link from 'next/link';
+import { getCurrentLang } from '@/utils/get_dictionaries';
 
 
 export default function NavMd() {
+  const lang = getCurrentLang()
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <Logo />
+              <Link href={`/${lang}`}>
+                <Logo />
+              </Link>
             </div>
             <Menu />
           </div>

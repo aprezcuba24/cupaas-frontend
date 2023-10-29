@@ -1,5 +1,3 @@
-import 'server-only'
-
 export type Keys = 'es' | 'en'
 
 const dictionaries = {
@@ -16,3 +14,4 @@ let singletonLang: Keys = 'es'
 export const setLanguage = (lang: Keys) => singletonLang = lang;
 
 export const getCurrentDictionary = () => getDictionary(singletonLang);
+export const getCurrentLang = () => singletonLang;

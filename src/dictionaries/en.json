@@ -36,5 +36,11 @@
   "team_modal": {
     "title": "Add a new team",
     "body": "This functionality is not implemented. It comes soon."
+  },
+  "project_form": {
+    "title_new": "Create new project",
+    "name": "Name",
+    "git_url": "Git URL",
+    "btn": "Save"
   }
 }

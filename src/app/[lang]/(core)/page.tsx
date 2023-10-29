@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { getDictionary } from '../../../utils/get_dictionaries';
 import { PageParams } from '../../../utils/types';
+import Link from 'next/link';
 
 const projects = [
   {
@@ -37,13 +38,15 @@ export default async function Home({ params: { lang } }: PageParams) {
     <main>
       <div className='mb-5 flex justify-between'>
         <Input placeholder={t.projects_list.search_placeholder} className='mr-1' />
-        <Button variant="outline" className='bg-blue-900 hover:bg-blue-700 text-white hover:text-white'>
+        <Link href={'new'} className='inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-blue-900 hover:bg-blue-700 text-white hover:text-white py-1 px-3'>
           {t.projects_list.btn_new}
-        </Button>
+        </Link>
       </div>
       <div className="grid gap-x-8 gap-y-4 grid-cols-1 md:grid-cols-3">
         {projects.map(({ id, ...rest }) => (
-          <Project key={id} data={{ id, ...rest }}/>
+          <Link key={id}  href={'/'}>
+            <Project data={{ id, ...rest }}/>
+          </Link>
         ))}
       </div>
     </main>

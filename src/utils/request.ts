@@ -31,3 +31,5 @@ export const request = async (method: string, path: string, data: any = null, he
     errors: await response.json()
   }
 }
+
+export type RequestResponse = ReturnType<typeof request>;

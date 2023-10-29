@@ -36,5 +36,11 @@
   "team_modal": {
     "title": "Crear un nuevo equipo",
     "body": "Esta funcionalidad no está implementada. Pronto lo estará."
+  },
+  "project_form": {
+    "title_new": "Crear nuevo proyecto",
+    "name": "Nombre",
+    "git_url": "Git URL",
+    "btn": "Salvar"
   }
 }
