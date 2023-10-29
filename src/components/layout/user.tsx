@@ -3,6 +3,7 @@ import Dropdown, { Option } from '@/components/Dropdowns';
 import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { logout } from '@/services/auth';
+import TeamSelector from '../TeamSelector';
 
 const SIGN_OUT = 'sign_out'
 
@@ -17,6 +18,9 @@ export default function UserSetting() {
 
   return (
     <>
+      <div className='mr-2'>
+        <TeamSelector/>
+      </div>
       <button type="button" className="mr-2 relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
         <span className="absolute -inset-1.5"></span>
         <span className="sr-only">View notifications</span>
