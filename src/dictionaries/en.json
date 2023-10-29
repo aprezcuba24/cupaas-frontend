@@ -32,5 +32,9 @@
   "projects_list": {
     "search_placeholder": "Search...",
     "btn_new": "New"
+  },
+  "team_modal": {
+    "title": "Add a new team",
+    "body": "This functionality is not implemented. It comes soon."
   }
 }

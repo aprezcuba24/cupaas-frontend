@@ -32,5 +32,9 @@
   "projects_list": {
     "search_placeholder": "Buscar...",
     "btn_new": "Nuevo"
+  },
+  "team_modal": {
+    "title": "Crear un nuevo equipo",
+    "body": "Esta funcionalidad no está implementada. Pronto lo estará."
   }
 }
