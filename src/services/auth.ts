@@ -1,12 +1,14 @@
 'use server'
 import { request } from '@/utils/request'
 import { cookies } from 'next/headers'
+import { setDefaultTeam } from '@/services/team';
 
 export const login = async (formData: FormData) => {
   const response = await request('POST', '/auth-token/', formData)
   if (response instanceof Response) {
     const { token } = await response.json();
     cookies().set('token', token)
+    setDefaultTeam()
   }
   return response
 }

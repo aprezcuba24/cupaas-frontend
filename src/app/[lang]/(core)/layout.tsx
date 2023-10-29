@@ -3,7 +3,6 @@ import { Suspense } from 'react'
 import Nav from '@/components/layout/Nav'
 import { getDictionary } from '@/utils/get_dictionaries';
 import { PageParams } from '@/utils/types';
-
 export default async function DashboardLayout({
   children, // will be a page or nested layout
   params: { lang }

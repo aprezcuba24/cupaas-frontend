@@ -1,7 +1,7 @@
 import Project from './project';
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Dictionary, getDictionary } from '../../../utils/get_dictionaries';
+import { getDictionary } from '../../../utils/get_dictionaries';
 import { PageParams } from '../../../utils/types';
 
 const projects = [
@@ -30,10 +30,6 @@ const projects = [
     branch: 'dev',
   },
 ]
-
-type Props = {
-  t: Dictionary,
-}
 
 export default async function Home({ params: { lang } }: PageParams) {
   const t = await getDictionary(lang)

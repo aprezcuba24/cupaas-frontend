@@ -1,4 +1,4 @@
-import { getTeams, Team } from '@/services/team';
+import { Team } from '@/services/team';
 import {
   Select,
   SelectContent,
@@ -9,15 +9,13 @@ import {
 import AddOption from './AddTeam'
 import { Dictionary } from '@/utils/get_dictionaries';
 
-export default async function TeamSelector({ t }: { t: Dictionary}) {
-  const teams = await getTeams();
-  const firstTeam: Team = teams.length ? teams[0] : {}
+export default function TeamSelector({ t, currentTeam, teams }: { t: Dictionary, currentTeam: Team, teams: Team[]}) {
   return (
     <div className='flex'>
       <div className='mr-1'>
         <Select>
           <SelectTrigger className="w-[180px] text-white bg-gray-800 border-gray-800">
-            <SelectValue placeholder={firstTeam.name}/>
+            <SelectValue placeholder={currentTeam.name}/>
           </SelectTrigger>
           <SelectContent>
             {teams.map(({ id, name }) => <SelectItem key={id} value="light">{name}</SelectItem>)}
