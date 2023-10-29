@@ -28,5 +28,9 @@
     "title": "Enviar email para recupear contraseña",
     "btn": "Enviar",
     "email": "Correo elctrónico"
+  },
+  "projects_list": {
+    "search_placeholder": "Buscar...",
+    "btn_new": "Nuevo"
   }
 }

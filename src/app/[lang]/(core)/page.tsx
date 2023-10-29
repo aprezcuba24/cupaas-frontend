@@ -1,6 +1,8 @@
 import Project from './project';
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { Dictionary, getDictionary } from '../../../utils/get_dictionaries';
+import { PageParams } from '../../../utils/types';
 
 const projects = [
   {
@@ -29,13 +31,18 @@ const projects = [
   },
 ]
 
-export default function Home() {
+type Props = {
+  t: Dictionary,
+}
+
+export default async function Home({ params: { lang } }: PageParams) {
+  const t = await getDictionary(lang)
   return (
     <main>
       <div className='mb-5 flex justify-between'>
-        <Input placeholder='Search...' className='mr-1' />
+        <Input placeholder={t.projects_list.search_placeholder} className='mr-1' />
         <Button variant="outline" className='bg-blue-900 hover:bg-blue-700 text-white hover:text-white'>
-          New
+          {t.projects_list.btn_new}
         </Button>
       </div>
       <div className="grid gap-x-8 gap-y-4 grid-cols-1 md:grid-cols-3">

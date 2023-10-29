@@ -28,5 +28,9 @@
     "title": "Send email to recover password",
     "btn": "Send",
     "email": "Email"
+  },
+  "projects_list": {
+    "search_placeholder": "Search...",
+    "btn_new": "New"
   }
 }
