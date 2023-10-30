@@ -9,11 +9,12 @@ export default async function Page({ params: { lang }}: PageParams) {
   const t = await getDictionary(lang)
   async function create(formData: FormData) {
     'use server'
-    const response = await createProject(formData)
-    if (response instanceof Response) {
-      return redirect(`/${lang}`)
-    }
-    return response;
+    console.log(Object.fromEntries(formData));
+    // const response = await createProject(formData)
+    // if (response instanceof Response) {
+    //   return redirect(`/${lang}`)
+    // }
+    // return response;
   }
   return (
     <>

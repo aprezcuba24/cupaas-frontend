@@ -41,6 +41,8 @@
     "title_new": "Crear nuevo proyecto",
     "name": "Nombre",
     "git_url": "Git URL",
+    "branches": "Branches",
+    "branch_ph": "Nombre del branch",
     "btn": "Salvar"
   }
 }
