@@ -63,7 +63,7 @@ export default function Branches({ name, t }: BranchesProps) {
             <li key={item.id} className="input-container">
               <Row
                 value={item}
-                name={`${name}[${index}].name`}
+                name={`${name}[${index}].ref`}
                 onRemove={() => handleRemove(index)}
                 t={t}
                 control={control}
@@ -72,7 +72,7 @@ export default function Branches({ name, t }: BranchesProps) {
           );
         })}
         <li>
-          <div onClick={() => handleAppend({ name: '' })} className='border-dashed border-2 border-gray-500 h-8 cursor-text'></div>
+          <div onClick={() => handleAppend({ ref: '' })} className='border-dashed border-2 border-gray-500 h-8 cursor-text'></div>
         </li>
       </ul>
     </>

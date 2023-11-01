@@ -1,5 +1,5 @@
 'use client'
-import React from "react";
+import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod"
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form"
@@ -9,35 +9,34 @@ import { Dictionary } from '@/utils/get_dictionaries';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Branches from "./branches";
-
-const formSchema = z.object({
-  name: z.string().min(2).max(50),
-  git_url: z.string().url(),
-  branches: z.any().array(),
-})
+import { Project, ProjectSchema } from "@/types/project";
 
 type FormProps = {
-  action: (formData: FormData) => RequestResponse;
+  action: (values: Project) => RequestResponse;
   t: Dictionary;
 }
 
 export default function ProjectForm({ t, action }: FormProps) {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<Project>({
+    resolver: zodResolver(ProjectSchema),
     defaultValues: {
       name: "",
       git_url: "",
       branches: [
         {
-          name: 'main',
+          ref: 'main',
         },
       ]
     },
   })
 
+  const handleSubmit = useCallback((values: Project) => {
+    return action(values)
+  }, [action])
+
   return (
     <Form {...form}>
-      <form action={action} className="space-y-8">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
       <FormField
           control={form.control}
           name="name"

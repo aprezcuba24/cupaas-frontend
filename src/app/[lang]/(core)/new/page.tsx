@@ -4,17 +4,17 @@ import ProjectForm from './form'
 import Title from '@/components/Title';
 import { createProject } from '@/services/project';
 import { redirect } from 'next/navigation';
+import { Project } from '@/types/project';
 
 export default async function Page({ params: { lang }}: PageParams) {
   const t = await getDictionary(lang)
-  async function create(formData: FormData) {
+  async function create(project: Project) {
     'use server'
-    console.log(Object.fromEntries(formData));
-    // const response = await createProject(formData)
-    // if (response instanceof Response) {
-    //   return redirect(`/${lang}`)
-    // }
-    // return response;
+    const response = await createProject(project)
+    if (response instanceof Response) {
+      return redirect(`/${lang}`)
+    }
+    return response;
   }
   return (
     <>
