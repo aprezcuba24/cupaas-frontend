@@ -6,4 +6,9 @@ export const ProjectSchema = z.object({
   branches: z.any().array(),
 })
 
-export type Project = z.infer<typeof ProjectSchema>
+export type TProject = {
+  id?: string;
+  commit: string;
+  url: string;
+  last_commit_at: string;
+} & z.infer<typeof ProjectSchema>

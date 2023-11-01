@@ -9,15 +9,15 @@ import { Dictionary } from '@/utils/get_dictionaries';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Branches from "./branches";
-import { Project, ProjectSchema } from "@/types/project";
+import { TProject, ProjectSchema } from "@/types/project";
 
 type FormProps = {
-  action: (values: Project) => RequestResponse;
+  action: (values: TProject) => RequestResponse;
   t: Dictionary;
 }
 
 export default function ProjectForm({ t, action }: FormProps) {
-  const form = useForm<Project>({
+  const form = useForm<TProject>({
     resolver: zodResolver(ProjectSchema),
     defaultValues: {
       name: "",
@@ -30,7 +30,7 @@ export default function ProjectForm({ t, action }: FormProps) {
     },
   })
 
-  const handleSubmit = useCallback((values: Project) => {
+  const handleSubmit = useCallback((values: TProject) => {
     return action(values)
   }, [action])
 

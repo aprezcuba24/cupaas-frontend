@@ -1,9 +1,10 @@
 import Project from './project';
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { getDictionary } from '../../../utils/get_dictionaries';
-import { PageParams } from '../../../utils/types';
+import { getDictionary } from '@/utils/get_dictionaries';
+import { PageParams } from '@/utils/types';
 import Link from 'next/link';
+import { getProjects } from '@/services/project';
+import { TProject } from '@/types/project';
 
 const projects = [
   {
@@ -34,6 +35,7 @@ const projects = [
 
 export default async function Home({ params: { lang } }: PageParams) {
   const t = await getDictionary(lang)
+  const projects: TProject[] = await getProjects()
   return (
     <main>
       <div className='mb-5 flex justify-between'>

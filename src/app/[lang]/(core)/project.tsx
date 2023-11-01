@@ -8,12 +8,13 @@ import {
 } from "@/components/ui/card"
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { Badge } from "@/components/ui/badge"
+import { TProject } from '@/types/project';
 
 const COMMIT_MAX_LENGTH = 40
 
-export default function Project({ data }: { data: any }) {
+export default function Project({ data }: { data: TProject }) {
   const commitText = useMemo(
-    () => data.commit.length > COMMIT_MAX_LENGTH ? data.commit.slice(0, COMMIT_MAX_LENGTH) + '...' : data.commit,
+    () => data.commit && data.commit.length > COMMIT_MAX_LENGTH ? data.commit.slice(0, COMMIT_MAX_LENGTH) + '...' : data.commit,
     [data.commit]
   )
   return (
@@ -26,11 +27,11 @@ export default function Project({ data }: { data: any }) {
         <CardDescription>{data.url}</CardDescription>
       </CardHeader>
       <CardContent>
-        <strong>{commitText}</strong>
         <div className='flex justify-between'>
-          <CardDescription>{data.time}</CardDescription>
-          <Badge>{data.branch}</Badge>
+          <strong>{commitText}</strong>
+          <CardDescription>{data.last_commit_at}</CardDescription>
         </div>
+        {data.branches.map(({ id, ref }) => <Badge key={id} className='mr-1'>{ref}</Badge> )}
       </CardContent>
     </Card>
   )
