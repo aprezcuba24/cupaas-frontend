@@ -76,7 +76,9 @@ export default function ProjectForm({ t, action }: FormProps) {
             </FormItem>
           )}
         />
-        <Button type="submit">{t.project_form.btn}</Button>
+        <div className="flex justify-end">
+          <Button type="submit">{t.project_form.btn}</Button>
+        </div>
       </form>
     </Form>
   );
