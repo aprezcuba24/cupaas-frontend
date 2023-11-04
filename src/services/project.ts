@@ -11,3 +11,8 @@ export const getProjects = async () => {
   const currentTeam = getCurrentTeam()
   return (await request('GET', `/api/teams/${currentTeam.id}/projects/`) as Response).json()
 }
+
+export const getProject = async (id: string) => {
+  const currentTeam = getCurrentTeam()
+  return (await request('GET', `/api/teams/${currentTeam.id}/projects/${id}/`) as Response).json()
+}

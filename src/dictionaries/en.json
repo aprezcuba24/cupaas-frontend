@@ -44,5 +44,10 @@
     "branches": "Branches",
     "branch_ph": "Branch name",
     "btn": "Save"
+  },
+  "project_menu": {
+    "env_variables": "Environment Variables",
+    "create": "Create",
+    "detail": "Detail"
   }
 }
