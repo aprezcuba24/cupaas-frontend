@@ -5,8 +5,21 @@ import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons"
 import * as SelectPrimitive from "@radix-ui/react-select"
 
 import { cn } from "@/lib/utils"
+import { ChangeEvent, useCallback } from 'react';
 
-const Select = SelectPrimitive.Root
+type SelectProps = {
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void,
+  // onChange: (event: { target: { name: string, value: any }}) => void,
+  name: string,
+}
+
+const Select = ({ onChange, name, children }: SelectProps & SelectPrimitive.SelectProps) => {
+  const handleOnChange = useCallback((value: string) => {
+    const event = { target: { name, value }} as ChangeEvent<HTMLInputElement>;
+    onChange(event);
+  }, [onChange, name])
+  return <SelectPrimitive.Root onValueChange={handleOnChange}>{children}</SelectPrimitive.Root>
+}
 
 const SelectGroup = SelectPrimitive.Group
 

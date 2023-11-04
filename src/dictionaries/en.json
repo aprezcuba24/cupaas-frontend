@@ -49,5 +49,9 @@
     "env_variables": "Environment Variables",
     "create": "Create",
     "detail": "Detail"
+  },
+  "env_variable": {
+    "title": "Mange the Environment Variables",
+    "btn_save": "Save"
   }
 }
