@@ -7,6 +7,11 @@ export const createProject = async (project: TProject) => {
   return request('POST', `/api/teams/${currentTeam.id}/projects/`, project)
 }
 
+export const updateProject = async (id: string, project: Partial<TProject>) => {
+  const currentTeam = getCurrentTeam()
+  return request('PATCH', `/api/teams/${currentTeam.id}/projects/${id}/`, project)
+}
+
 export const getProjects = async () => {
   const currentTeam = getCurrentTeam()
   return (await request('GET', `/api/teams/${currentTeam.id}/projects/`) as Response).json()

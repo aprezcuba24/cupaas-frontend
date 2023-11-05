@@ -7,7 +7,7 @@ import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
 import { MouseEventHandler, useRef, useEffect } from 'react';
 import BtnDashed from './BtnDashed';
 
-export type TRow = ComponentType<{ ref: MutableRefObject<null>}>
+export type TRow = ComponentType<{ value: any, ref: MutableRefObject<null>}>
 
 type RowProps = {
   t: Dictionary,
@@ -23,6 +23,7 @@ const Row = ({ t, control, value, onRemove, name, Component }: RowProps) => {
   useEffect(() => {
     !value?.name && inputRef.current && (inputRef.current as HTMLInputElement).focus()
   }, [inputRef, value])
+
   return (
     <div className='flex mb-5 items-center'>
       <Controller
