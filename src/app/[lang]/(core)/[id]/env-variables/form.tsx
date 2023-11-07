@@ -11,6 +11,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@
 import { Button } from '@/components/ui/button';
 import { TProject, ProjectSchema } from '@/types/project';
 import { cn } from '@/lib/utils';
+import { useToast } from '@/components/ui/use-toast';
 
 type RowProps = {
   branches: TBranch[],
@@ -39,9 +40,9 @@ const Row = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement> &
     return (
       <div className='flex'>
         <Input value={(formValue as any)?.name} onChange={handlerChange} className='w-1/6 mr-1' name="name" placeholder='ej CLIENT_KEY' ref={ref} required />
-        <ItemError>{error?.name}</ItemError>
+        <ItemError>{error?.name?.message}</ItemError>
         <Input value={(formValue as any)?.value} onChange={handlerChange} name="value" className='w-4/6 mr-1' required />
-        <ItemError>{error?.value}</ItemError>
+        <ItemError>{error?.value?.message}</ItemError>
         <ControlItem>
           <Select onChange={handlerChange} name="branch">
             <SelectTrigger className="w-[180px]">
@@ -51,7 +52,7 @@ const Row = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement> &
               {branches.map(({ id, ref }) => <SelectItem key={id} value={id as string}>{ref}</SelectItem>)}
             </SelectContent>
           </Select>
-          <ItemError>{error?.branch.message}</ItemError>
+          <ItemError>{error?.branch?.message}</ItemError>
         </ControlItem>
       </div>
     )
@@ -64,20 +65,31 @@ type TProjectEnvVariables = Pick<TProject, 'env_variables'>
 type FormEnvVariablesProps = {
   t: Dictionary,
   branches: TBranch[],
-  action: (projectId: string, data: any) => void,
+  action: (projectId: string, data: any) => any | boolean,
   projectId: string,
   value: TProjectEnvVariables,
 }
 
 export default function FormEnvVariables({ projectId, t, branches, action, value }: FormEnvVariablesProps) {
+  const { toast } = useToast()
   const form = useForm<TProjectEnvVariables>({
     resolver: zodResolver(ProjectSchema),
     defaultValues: value,
   })
 
-  const handleSubmit = useCallback((values: any) => {
-    return action(projectId, values)
-  }, [projectId, action])
+  const handleSubmit = useCallback(async (values: any) => {
+    const response = await action(projectId, values)
+    console.log(response);
+    if (response === true) {
+      toast({
+        title: t.message_toast.title_save,
+        description: t.message_toast.description_save,
+        variant: 'success',
+      })
+    } else {
+      return response;
+    }
+  }, [projectId, action, toast, t])
 
   return (
     <Form {...form}>

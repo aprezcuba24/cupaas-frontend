@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Inter as FontSans } from "next/font/google"
 import ThemeRegister from '@/components/ThemeRegister'
 import { cn } from '@/lib/utils';
+import { Toaster } from "@/components/ui/toaster"
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ export default function RootLayout({
         )}>
           <div className='h-screen'>
             {children}
+            <Toaster />
           </div>
         </body>
       </ThemeRegister>

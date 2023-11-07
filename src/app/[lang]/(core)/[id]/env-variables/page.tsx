@@ -19,7 +19,7 @@ export default async function Page({ params: { id } }: PageProps) {
     'use server'
     const response = await updateProject(projectId, { env_variables })
     if (response instanceof Response) {
-      console.log('Register...');
+      return true;
     } else {
       return response;
     }

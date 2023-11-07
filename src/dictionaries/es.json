@@ -1,4 +1,8 @@
 {
+  "message_toast": {
+    "title_save": "Salvado",
+    "description_save": "Los datos han sido salvado satisfactoriamente."
+  },
   "sign_in": {
     "title": "Acceda a su cuenta",
     "email": "Correo electrónico",
