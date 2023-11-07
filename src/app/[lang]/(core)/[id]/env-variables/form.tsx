@@ -1,60 +1,79 @@
 'use client'
 import { Dictionary } from '@/utils/get_dictionaries';
-import { Form, FormField, FormItem, FormControl, FormMessage } from '@/components/ui/form';
+import { Form, FormField, FormItem, FormControl, useFormField } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { EnvVariablesSchema, TEnvVariablesSchema } from '@/types/env-variables';
-import FormItems, { TRow } from '@/components/Form/FormItems';
+import FormItems, { ItemError } from '@/components/Form/FormItems';
 import { Input } from '@/components/ui/input';
-import { forwardRef, useMemo, useCallback, InputHTMLAttributes, ChangeEvent } from 'react';
+import { forwardRef, useMemo, useCallback, InputHTMLAttributes, ChangeEvent, PropsWithChildren } from 'react';
 import { TBranch } from '@/types/branch';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
+import { TProject, ProjectSchema } from '@/types/project';
+import { cn } from '@/lib/utils';
 
-// eslint-disable-next-line react/display-name
-const createRow = (branches: TBranch[], t: Dictionary) => forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(
-  ({ name: formName, value: formValue, onChange }, ref) => {
-  const handlerChange = useCallback(({ target: { name, value }}: ChangeEvent<HTMLInputElement>) => {
-    const event = { target: { name: formName as string, value: { ...formValue as any, [name]: value } } } as ChangeEvent<HTMLInputElement>
-    onChange && onChange(event)
-  }, [onChange, formName, formValue]);
-  const branchName = useMemo(() => {
-    const branch = branches.find(({ id }) => id === (formValue as any)?.branch)
-    return branch && branch.ref
-  }, [formValue])
+type RowProps = {
+  branches: TBranch[],
+  index: string,
+}
 
-  return (
-    <div className='flex'>
-      <Input value={(formValue as any)?.name} onChange={handlerChange} name="name" className='w-1/6 mr-1' placeholder='ej CLIENT_KEY' ref={ref} required />
-      <Input value={(formValue as any)?.value} onChange={handlerChange} name="value" className='w-4/6 mr-1' required />
-      <Select onChange={handlerChange} name="branch">
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder={branchName} />
-        </SelectTrigger>
-        <SelectContent>
-          {branches.map(({ id, ref }) => <SelectItem key={id} value={id as string}>{ref}</SelectItem>)}
-        </SelectContent>
-      </Select>
-    </div>
-  )
-}) as TRow
+const ControlItem = ({ children, className = '' }: PropsWithChildren & { className?: string }) => (
+  <div className={cn('flex flex-col', className)}>
+    {children}
+  </div>
+)
+
+const Row = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement> & RowProps>(
+  ({ name: formName, value: formValue, onChange, index, branches = [] }, ref) => {
+    const handlerChange = useCallback(({ target: { name, value }}: ChangeEvent<HTMLInputElement>) => {
+      const event = { target: { name: formName as string, value: { ...formValue as any, [name]: value } } } as ChangeEvent<HTMLInputElement>
+      onChange && onChange(event)
+    }, [onChange, formName, formValue]);
+    const branchName = useMemo(() => {
+      const branch = branches.find(({ id }) => id === (formValue as any)?.branch)
+      return branch && branch.ref
+    }, [formValue, branches])
+    const { error: rowErrors, formMessageId } = useFormField()
+    const error = useMemo(() => (rowErrors as any)?.[index], [rowErrors, index])
+  
+    return (
+      <div className='flex'>
+        <Input value={(formValue as any)?.name} onChange={handlerChange} className='w-1/6 mr-1' name="name" placeholder='ej CLIENT_KEY' ref={ref} required />
+        <ItemError>{error?.name}</ItemError>
+        <Input value={(formValue as any)?.value} onChange={handlerChange} name="value" className='w-4/6 mr-1' required />
+        <ItemError>{error?.value}</ItemError>
+        <ControlItem>
+          <Select onChange={handlerChange} name="branch">
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder={branchName} />
+            </SelectTrigger>
+            <SelectContent>
+              {branches.map(({ id, ref }) => <SelectItem key={id} value={id as string}>{ref}</SelectItem>)}
+            </SelectContent>
+          </Select>
+          <ItemError>{error?.branch.message}</ItemError>
+        </ControlItem>
+      </div>
+    )
+  }
+);
+Row.displayName = 'Row'
+
+type TProjectEnvVariables = Pick<TProject, 'env_variables'>
 
 type FormEnvVariablesProps = {
   t: Dictionary,
   branches: TBranch[],
   action: (projectId: string, data: any) => void,
   projectId: string,
-  value: TEnvVariablesSchema[],
+  value: TProjectEnvVariables,
 }
 
 export default function FormEnvVariables({ projectId, t, branches, action, value }: FormEnvVariablesProps) {
-  const form = useForm<TEnvVariablesSchema>({
-    resolver: zodResolver(EnvVariablesSchema),
-    defaultValues: {
-      env_variables: value,
-    },
+  const form = useForm<TProjectEnvVariables>({
+    resolver: zodResolver(ProjectSchema),
+    defaultValues: value,
   })
-  const row = useMemo(() => createRow(branches, t), [branches, t])
 
   const handleSubmit = useCallback((values: any) => {
     return action(projectId, values)
@@ -69,9 +88,8 @@ export default function FormEnvVariables({ projectId, t, branches, action, value
           render={({ field } ) => (
             <FormItem>
               <FormControl>
-                <FormItems {...field} t={t} Component={row}/>
+                <FormItems {...field} t={t} Component={Row} branches={branches}/>
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />

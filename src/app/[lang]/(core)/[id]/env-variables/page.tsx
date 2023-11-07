@@ -1,8 +1,8 @@
 import { getCurrentDictionary } from '@/utils/get_dictionaries';
 import FormEnvVariables from './form';
 import { getBranches } from '@/services/branch';
-import { TBranch } from '@/types/branch';
 import { getProject, updateProject } from '@/services/project';
+import { TProject } from '@/types/project';
 
 type PageProps = {
   params: {
@@ -15,15 +15,20 @@ export default async function Page({ params: { id } }: PageProps) {
   const branches = await getBranches(id)
   const project = await getProject(id)
 
-  const action = async (projectId: string, { env_variables }: { env_variables: TBranch[]}) => {
+  const action = async (projectId: string, { env_variables }: TProject) => {
     'use server'
-    return (await updateProject(projectId, { env_variables }) as Response).json()
+    const response = await updateProject(projectId, { env_variables })
+    if (response instanceof Response) {
+      console.log('Register...');
+    } else {
+      return response;
+    }
   }
 
   return (
     <div>
       <h2 className='mb-5'>{t.env_variable.title}</h2>
-      <FormEnvVariables t={t} branches={branches} action={action} projectId={id} value={project.env_variables} />
+      <FormEnvVariables t={t} branches={branches} action={action} projectId={id} value={project} />
     </div>
   )
 }

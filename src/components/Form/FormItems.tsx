@@ -1,4 +1,4 @@
-import { ComponentType, MutableRefObject } from 'react';
+import { ComponentType, PropsWithChildren } from 'react';
 import { useFieldArray, Controller } from 'react-hook-form';
 import { useFormContext } from "react-hook-form";
 import { Input } from '@/components/ui/input';
@@ -7,18 +7,30 @@ import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
 import { MouseEventHandler, useRef, useEffect } from 'react';
 import BtnDashed from './BtnDashed';
 
-export type TRow = ComponentType<{ value: any, ref: MutableRefObject<null>}>
+export const ItemError = ({ children }: PropsWithChildren) => {
+  if (!children) {
+    return null;
+  }
+  return (
+    <p
+      className="text-[0.8rem] font-medium text-destructive"
+    >
+      {children}
+    </p>
+  )
+}
 
 type RowProps = {
   t: Dictionary,
   control: any,
   value: any,
   name: string,
+  index: string | number,
   onRemove: MouseEventHandler<HTMLButtonElement>,
-  Component?: TRow,
+  Component?: React.ForwardRefExoticComponent<any>,
 }
 
-const Row = ({ t, control, value, onRemove, name, Component }: RowProps) => {
+const Row = ({ t, control, value, onRemove, name, Component, index, ...rest }: RowProps) => {
   const inputRef = useRef(null);
   useEffect(() => {
     !value?.name && inputRef.current && (inputRef.current as HTMLInputElement).focus()
@@ -29,7 +41,7 @@ const Row = ({ t, control, value, onRemove, name, Component }: RowProps) => {
       <Controller
         render={({ field }) => (
           <div className='w-full mr-2'>
-            {Component ? <Component {...field} ref={inputRef} /> : <Input placeholder={t.project_form.branch_ph} {...field} ref={inputRef} required />}
+            {Component ? <Component {...rest} {...field} ref={inputRef} index={index} /> : <Input placeholder={t.project_form.branch_ph} {...field} ref={inputRef} required />}
           </div>
         )}
         defaultValue={value}
@@ -46,11 +58,12 @@ const Row = ({ t, control, value, onRemove, name, Component }: RowProps) => {
 type FormItemsProps = {
   name: string;
   t: Dictionary
-  Component: TRow,
+  Component: React.ForwardRefExoticComponent<any>,
   BtnAdd?: ComponentType<{ onClick: () => void }>
+  [key: string]: any,
 }
 
-export default function FormItems({ name, t, Component, BtnAdd }: FormItemsProps) {
+export default function FormItems({ name, t, Component, BtnAdd, ...rest }: FormItemsProps) {
   const { control } = useFormContext();
   const { fields, append, remove } = useFieldArray({
     control,
@@ -80,6 +93,8 @@ export default function FormItems({ name, t, Component, BtnAdd }: FormItemsProps
                 t={t}
                 control={control}
                 Component={Component}
+                {...rest}
+                index={index}
               />
             </li>
           );
