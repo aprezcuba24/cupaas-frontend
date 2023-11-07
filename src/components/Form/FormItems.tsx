@@ -1,4 +1,4 @@
-import { ComponentType, PropsWithChildren } from 'react';
+import { ComponentType } from 'react';
 import { useFieldArray, Controller } from 'react-hook-form';
 import { useFormContext } from "react-hook-form";
 import { Input } from '@/components/ui/input';
@@ -6,16 +6,20 @@ import { Dictionary } from '@/utils/get_dictionaries';
 import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
 import { MouseEventHandler, useRef, useEffect } from 'react';
 import BtnDashed from './BtnDashed';
+import { useFormField } from '@/components/ui/form';
+import * as _ from 'lodash';
 
-export const ItemError = ({ children }: PropsWithChildren) => {
-  if (!children) {
+export const ItemError = ({ field }: { field: string }) => {
+  const { error } = useFormField()
+  const message = _.get(error, `${field}.message`)
+  if (!message) {
     return null;
   }
   return (
     <p
       className="text-[0.8rem] font-medium text-destructive"
     >
-      {children}
+      {message}
     </p>
   )
 }

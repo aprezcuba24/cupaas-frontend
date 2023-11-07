@@ -1,6 +1,6 @@
 'use client'
 import { Dictionary } from '@/utils/get_dictionaries';
-import { Form, FormField, FormItem, FormControl, useFormField } from '@/components/ui/form';
+import { Form, FormField, FormItem, FormControl } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormItems, { ItemError } from '@/components/Form/FormItems';
@@ -34,15 +34,13 @@ const Row = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement> &
       const branch = branches.find(({ id }) => id === (formValue as any)?.branch)
       return branch && branch.ref
     }, [formValue, branches])
-    const { error: rowErrors, formMessageId } = useFormField()
-    const error = useMemo(() => (rowErrors as any)?.[index], [rowErrors, index])
   
     return (
       <div className='flex'>
         <Input value={(formValue as any)?.name} onChange={handlerChange} className='w-1/6 mr-1' name="name" placeholder='ej CLIENT_KEY' ref={ref} required />
-        <ItemError>{error?.name?.message}</ItemError>
+        <ItemError field={`${index}.name`} />
         <Input value={(formValue as any)?.value} onChange={handlerChange} name="value" className='w-4/6 mr-1' required />
-        <ItemError>{error?.value?.message}</ItemError>
+        <ItemError field={`${index}.value`} />
         <ControlItem>
           <Select onChange={handlerChange} name="branch">
             <SelectTrigger className="w-[180px]">
@@ -52,7 +50,7 @@ const Row = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement> &
               {branches.map(({ id, ref }) => <SelectItem key={id} value={id as string}>{ref}</SelectItem>)}
             </SelectContent>
           </Select>
-          <ItemError>{error?.branch?.message}</ItemError>
+          <ItemError field={`${index}.branch`} />
         </ControlItem>
       </div>
     )
