@@ -1,5 +1,5 @@
 'use client'
-import React, { useCallback } from "react";
+import React, { useCallback, forwardRef } from "react";
 import { useForm } from "react-hook-form";
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form"
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -7,8 +7,28 @@ import { RequestResponse } from '@/utils/request';
 import { Dictionary } from '@/utils/get_dictionaries';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import Branches from "./branches";
-import { TProject, ProjectSchema } from "@/types/project";
+import { TProject as BaseTProject, ProjectSchema } from "@/types/project";
+import { TBranch } from '@/types/branch';
+import { InputHTMLAttributes, ChangeEvent } from 'react';
+import FormItems from '@/components/Form/FormItems';
+
+type BranchRowProps = {
+  branches: TBranch[],
+  index: string,
+}
+
+const BranchRow = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement> & BranchRowProps>(
+  ({ name: formName, value: formValue, onChange, index }, ref) => {
+    const handlerChange = useCallback(({ target: { name, value }}: ChangeEvent<HTMLInputElement>) => {
+      const event = { target: { name: formName as string, value: { ...formValue as any, [name]: value } } } as ChangeEvent<HTMLInputElement>
+      onChange && onChange(event)
+    }, [onChange, formName, formValue]);
+
+    return <Input value={(formValue as any)?.ref} onChange={handlerChange} className='w-full' name="ref" ref={ref} required />
+  })
+BranchRow.displayName = 'BranchRow'
+
+type TProject = Omit<BaseTProject, 'env_variables'>
 
 type FormProps = {
   action: (values: TProject) => RequestResponse;
@@ -17,7 +37,7 @@ type FormProps = {
 
 export default function ProjectForm({ t, action }: FormProps) {
   const form = useForm<TProject>({
-    resolver: zodResolver(ProjectSchema),
+    resolver: zodResolver(ProjectSchema.omit({ env_variables: true })),
     defaultValues: {
       name: "",
       git_url: "",
@@ -28,6 +48,7 @@ export default function ProjectForm({ t, action }: FormProps) {
       ]
     },
   })
+  console.log(form.formState.errors);
 
   const handleSubmit = useCallback((values: TProject) => {
     return action(values)
@@ -69,7 +90,7 @@ export default function ProjectForm({ t, action }: FormProps) {
             <FormItem>
               <FormLabel>{t.project_form.branches}</FormLabel>
               <FormControl>
-                <Branches {...field} t={t}/>
+                <FormItems {...field} t={t} Component={BranchRow}/>
               </FormControl>
               <FormMessage />
             </FormItem>
