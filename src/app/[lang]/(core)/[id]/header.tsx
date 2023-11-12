@@ -6,15 +6,18 @@ import { usePathname } from 'next/navigation';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import { TProject } from '@/types/project';
 import { Dictionary } from '@/utils/get_dictionaries';
+import RemoveProject from './remove';
+import { Button } from '@/components/ui/button';
 
 type HeaderProps = {
   lang: string,
   project: TProject,
   id: string,
   t: Dictionary
+  removeProject: (id: string) => void,
 }
 
-export default function Header({ lang, project, id, t }: HeaderProps) {
+export default function Header({ lang, project, id, t, removeProject }: HeaderProps) {
   const pathname = usePathname()
   const isDetail = pathname.endsWith('/detail')
   const isEdit = pathname.endsWith('/edit')
@@ -28,12 +31,12 @@ export default function Header({ lang, project, id, t }: HeaderProps) {
       <Title>{project ? project.name : t.project_form.title_new}</Title>
       {isDetail && (
         <div className="w-full flex justify-end">
-          <Link
-            className="border-primary border rounded h-8 w-8 flex justify-center items-center text-primary pl-1"
-            href={`/${lang}/${id}/edit`}
-          >
-            <EditNoteIcon />
-          </Link>
+          <Button asChild size="icon" variant="outline" className='mr-3'>
+            <Link href={`/${lang}/${id}/edit`}>
+              <EditNoteIcon />
+            </Link>
+          </Button>
+          <RemoveProject project={project} t={t} removeProject={removeProject}/>
         </div>
       )}
     </div>

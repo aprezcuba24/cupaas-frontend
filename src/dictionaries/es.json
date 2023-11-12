@@ -57,5 +57,10 @@
   "env_variable": {
     "title": "Gestionar Variables de Entorno.",
     "btn_save": "Salvar"
+  },
+  "remove_project": {
+    "title": "Eliminar el proyecto",
+    "description": "¿Está seguro que quiere eliminar el proyecto? <br/> Este proceso es irreversible<br/><br/>Escriba el nombre del proyecto en el campo de texto.",
+    "btn": "Eliminar"
   }
 }

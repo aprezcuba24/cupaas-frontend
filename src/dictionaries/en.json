@@ -57,5 +57,11 @@
   "env_variable": {
     "title": "Mange the Environment Variables",
     "btn_save": "Save"
+  },
+  "remove_project": {
+    "title": "Delete the project",
+    "description": "Are you sure that you want remove this project? <br/> This process is irreversibly <br/><br/> Write the name of this project in the input.",
+    "question": "Write the name of this project in the input.",
+    "btn": "Remove"
   }
 }

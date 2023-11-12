@@ -17,7 +17,14 @@ export const updateProject = async (id: string, project: Partial<TProject>) => {
 
 export const getProjects = async () => {
   const currentTeam = getCurrentTeam()
-  return (await request('GET', `/api/teams/${currentTeam.id}/projects/`) as Response).json()
+  return (
+    await request(
+      'GET',
+      `/api/teams/${currentTeam.id}/projects/`,
+      null,
+      { next: { tags: ['projects'] } }
+    ) as Response
+  ).json()
 }
 
 export const getProject = async (id: string) => {
@@ -29,4 +36,10 @@ export const getProject = async (id: string) => {
       null,
       { next: { tags: [`project_${id}}`] } }
     ) as Response).json()
+}
+
+export const removeProject = async (id: string) => {
+  const currentTeam = getCurrentTeam()
+  await request('DELETE', `/api/teams/${currentTeam.id}/projects/${id}/`)
+  revalidateTag('projects')
 }
