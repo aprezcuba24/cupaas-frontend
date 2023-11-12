@@ -1,11 +1,10 @@
 'use client'
 import { Dictionary } from '@/utils/get_dictionaries';
 import { Action, useServerForm } from '@/hooks/useServerForm';
-import Link from '@/components/Link';
+import Link from 'next/link';
 import WrapperAuth from '@/components/AuthWrapper';
-import { TextField } from '@mui/material';
-import FormControl from '@/components/Form/FormControl';
 import GlobalError from '@/components/Form/GlobalError';
+import { Input } from '@/components/ui/input';
 
 type Props = {
   t: Dictionary,
@@ -31,18 +30,14 @@ export default function Form({ t, action }: Props) {
       footer={footer}
     >
       <GlobalError errors={errors}/>
-      <FormControl error={errors?.email}>
-        <TextField
-          label={t.send_password_recover.email}
-          variant="outlined"
-          size="small"
-          name="email"
-          type="email"
-          sx={{width: '100%'}}
-          required
-          autoComplete="email"
-        />
-      </FormControl>
+      <Input
+        className={errors?.email && 'border-red-500'}
+        placeholder={t.send_password_recover.email}
+        name="email"
+        type='email'
+        required
+      />
+      {errors?.email && <p className='text-red-500'>{errors.email}</p>}
     </WrapperAuth>
   )
 }

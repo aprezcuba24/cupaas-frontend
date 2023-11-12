@@ -14,11 +14,11 @@ export const request = async (method: string, path: string, data: any = null, op
   }
   options = {
     method,
+    ...options,
     headers: {
       ...defaultHeaders,
       ...options.headers || {},
     },
-    ...options
   }
   if (data) {
     options.body = JSON.stringify(data)

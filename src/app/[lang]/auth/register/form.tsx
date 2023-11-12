@@ -1,10 +1,9 @@
 'use client'
 import { useServerForm, Action } from '@/hooks/useServerForm';
 import WrapperAuth from '@/components/AuthWrapper';
-import { TextField } from '@mui/material';
 import { Dictionary } from '@/utils/get_dictionaries';
-import Link from '@/components/Link';
-import FormControl from '@/components/Form/FormControl';
+import Link from 'next/link';
+import { Input } from '@/components/ui/input';
 
 type Props = {
   t: Dictionary,
@@ -27,29 +26,10 @@ export default function Form({ t, action }: Props) {
       btn={t.register.btn}
       footer={footer}
     >
-      <FormControl error={errors?.name}>
-        <TextField
-          label={t.register.name}
-          variant="outlined"
-          size="small"
-          name="name"
-          type="text"
-          sx={{width: '100%'}}
-          required
-        />
-      </FormControl>
-      <FormControl error={errors?.email}>
-        <TextField
-          label={t.register.email}
-          variant="outlined"
-          size="small"
-          name="email"
-          type="email"
-          sx={{width: '100%'}}
-          required
-          autoComplete="email"
-        />
-      </FormControl>
+      <Input className={errors?.name && 'border-red-500'} placeholder={t.register.name} name="name" required />
+      {errors?.name && <p className='text-red-500'>{errors.name}</p>}
+      <Input className={errors?.email && 'border-red-500'} placeholder={t.register.email} name="email" required />
+      {errors?.email && <p className='text-red-500'>{errors.email}</p>}
     </WrapperAuth>
   )
 }
