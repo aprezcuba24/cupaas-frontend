@@ -63,7 +63,7 @@ export default function ProjectForm({ t, action, value, lang }: FormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
-      <FormField
+        <FormField
           control={form.control}
           name="name"
           render={({ field }) => (

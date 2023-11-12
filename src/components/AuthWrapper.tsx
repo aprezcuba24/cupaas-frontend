@@ -1,6 +1,5 @@
 'use client'
 import { ReactNode } from 'react';
-import { Typography, Box } from '@mui/material';
 import BtnSubmit from './Form/BtnSubmit';
 
 type Props = {
@@ -19,25 +18,21 @@ export default function AuthWrapper({
   children
 }: Props) {
   return (
-    <Box pt={12} px={3}>
-      <Typography variant="h5" textAlign='center' fontWeight='bold'>
-        {title}
-      </Typography>
-      <Box mt={10} mx='auto' sx={{ width: { xs: '100%', md: '25%' } }}>
-        <form action={create}>
-          {Array.isArray(children) ? children.map((item, index) => (
-            <Box mb={5} key={index}>
-              {item}
-            </Box>
-          )) : children}
-          <BtnSubmit variant="contained" sx={{width: '100%'}}>
-            {btn}
-          </BtnSubmit>
-        </form>
-        <Box mt={5} sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          {footer}
-        </Box>
-      </Box>
-    </Box>
+    <div className='m-auto w-1/4 pt-12'>
+      <h1 className='text-lg font-bold text-center'>{title}</h1>
+      <form action={create} className='pt-5'>
+        {Array.isArray(children) ? children.map((item, index) => (
+          <div className='mb-5'key={index}>
+            {item}
+          </div>
+        )) : children}
+        <BtnSubmit className='w-full'>
+          {btn}
+        </BtnSubmit>
+      </form>
+      <div className='flex justify-between pt-5'>
+        {footer}
+      </div>
+    </div>
   )
 }
