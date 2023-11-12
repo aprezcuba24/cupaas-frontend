@@ -21,11 +21,12 @@ export default async function Page({ params: { lang }}: PageParams) {
   const t = await getDictionary(lang)
   async function create(project: TFormProject) {
     'use server'
-    const response = await createProject(project as TProject)
-    if (response instanceof Response) {
-      return redirect(`/${lang}`)
-    }
-    return response;
+    return (await createProject(project as TProject) as Response).json()
   }
-  return <ProjectForm t={t} action={create} value={InitialData}/>
+  return <ProjectForm
+    t={t}
+    action={create}
+    value={InitialData}
+    lang={lang}
+  />
 }

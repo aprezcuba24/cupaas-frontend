@@ -11,6 +11,8 @@ import { TProject as BaseTProject, ProjectSchema } from "@/types/project";
 import { TBranch } from '@/types/branch';
 import { InputHTMLAttributes, ChangeEvent } from 'react';
 import FormItems from '@/components/Form/FormItems';
+import { useToast } from '@/components/ui/use-toast';
+import { useRouter } from 'next/navigation';
 
 type BranchRowProps = {
   branches: TBranch[],
@@ -31,21 +33,32 @@ BranchRow.displayName = 'BranchRow'
 export type TFormProject = Pick<BaseTProject, 'name'|'git_url'|'branches'>
 
 type FormProps = {
-  action: (values: TFormProject) => TError;
+  action: (values: TFormProject) => Promise<any | boolean>;
   t: Dictionary;
   value: TFormProject,
+  lang: string,
 }
 
-export default function ProjectForm({ t, action, value }: FormProps) {
+export default function ProjectForm({ t, action, value, lang }: FormProps) {
+  const { toast } = useToast()
+  const router = useRouter()
   const form = useForm<TFormProject>({
     resolver: zodResolver(ProjectSchema.omit({ env_variables: true })),
     defaultValues: value,
   })
-  console.log(form.formState.errors);
 
-  const handleSubmit = useCallback((values: TFormProject) => {
-    return action(values)
-  }, [action])
+  const handleSubmit = useCallback(async (values: TFormProject) => {
+    const response = await action(values)
+    if (response.id) {
+      router.push(`/${lang}/${response.id}/detail`)
+      toast({
+        title: t.message_toast.title_save,
+        description: t.message_toast.description_save,
+        variant: 'success',
+      })
+    }
+    return response
+  }, [action, toast, t, router, lang])
 
   return (
     <Form {...form}>

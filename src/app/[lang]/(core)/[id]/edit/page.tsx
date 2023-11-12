@@ -16,11 +16,12 @@ export default async function Page({ params: { id, lang } }: PagePrams) {
   const project: TProject = await getProject(id);
   async function create(project: TFormProject) {
     'use server'
-    const response = await updateProject(id, project as TProject)
-    if (response instanceof Response) {
-      return redirect(`/${lang}/${id}/detail`)
-    }
-    return response;
+    return (await updateProject(id, project as TProject) as Response).json()
   }
-  return <ProjectForm t={t} action={create} value={project}/>
+  return <ProjectForm
+    t={t}
+    action={create}
+    value={project}
+    lang={lang}
+  />
 }
