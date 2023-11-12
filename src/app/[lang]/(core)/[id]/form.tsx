@@ -3,7 +3,7 @@ import React, { useCallback, forwardRef } from "react";
 import { useForm } from "react-hook-form";
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form"
 import { zodResolver } from '@hookform/resolvers/zod';
-import { RequestResponse } from '@/utils/request';
+import { TError } from '@/utils/request';
 import { Dictionary } from '@/utils/get_dictionaries';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -28,29 +28,22 @@ const BranchRow = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElem
   })
 BranchRow.displayName = 'BranchRow'
 
-type TProject = Omit<BaseTProject, 'env_variables'>
+export type TFormProject = Pick<BaseTProject, 'name'|'git_url'|'branches'>
 
 type FormProps = {
-  action: (values: TProject) => RequestResponse;
+  action: (values: TFormProject) => TError;
   t: Dictionary;
+  value: TFormProject,
 }
 
-export default function ProjectForm({ t, action }: FormProps) {
-  const form = useForm<TProject>({
+export default function ProjectForm({ t, action, value }: FormProps) {
+  const form = useForm<TFormProject>({
     resolver: zodResolver(ProjectSchema.omit({ env_variables: true })),
-    defaultValues: {
-      name: "",
-      git_url: "",
-      branches: [
-        {
-          ref: 'main',
-        },
-      ]
-    },
+    defaultValues: value,
   })
   console.log(form.formState.errors);
 
-  const handleSubmit = useCallback((values: TProject) => {
+  const handleSubmit = useCallback((values: TFormProject) => {
     return action(values)
   }, [action])
 

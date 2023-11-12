@@ -27,7 +27,9 @@ export const createAccount = async (formData: FormData) => {
 
 export const changePassword = async (formData: FormData, token: string) => {
   return request('POST', '/api/users/change-password/', formData, {
-    'Authorization': `Token ${token}`
+    headers: {
+      'Authorization': `Token ${token}`
+    }
   })
 }
 

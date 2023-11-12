@@ -3,6 +3,26 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { Dictionary } from '@/utils/get_dictionaries';
 
+const Options = (enabled=true): Option[] => ([
+  {
+    enabled,
+    label: 'env_variables',
+    value: 'env-variables',
+  }
+])
+
+const NewOption: Option = {
+  enabled: true,
+  label: 'create',
+  value: 'new',
+}
+
+const DetailOption: Option = {
+  enabled: true,
+  label: 'detail',
+  value: 'detail'
+}
+
 type TLabelText = keyof Dictionary['project_menu']
 
 export type Option = {
@@ -25,8 +45,10 @@ const OptionLiStyle = (active = false, enabled = true) => `
   ${active && 'border-r-4 border-r-blue-900'}
 `
 
-export default function Menu({ options, t }: { options: Option[], t: Dictionary }) {
+export default function Menu({ t }: { t: Dictionary }) {
   const pathname = usePathname()
+  const isNewPage = pathname.endsWith('/new')
+  const options = isNewPage ? [NewOption, ...Options(false)] : [DetailOption, ...Options()]
   return (
     <ul className="flex flex-col">
       {options.map(({ label, value, enabled }) => (

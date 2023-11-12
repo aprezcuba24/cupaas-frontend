@@ -1,6 +1,8 @@
 import { cookies } from 'next/headers';
 
-export const request = async (method: string, path: string, data: any = null, headers = {}) => {
+export type TError = Promise<{ errors: any }>
+
+export const request = async (method: string, path: string, data: any = null, options: RequestInit = {}) => {
   const API_URL = process.env.API_URL
   data = data instanceof FormData ? Object.fromEntries(data) : data
   let defaultHeaders: any = {
@@ -10,12 +12,13 @@ export const request = async (method: string, path: string, data: any = null, he
   if (token) {
     defaultHeaders = { ...defaultHeaders, Authorization: `Token ${token.value}`}
   }
-  const options: RequestInit = {
+  options = {
     method,
     headers: {
       ...defaultHeaders,
-      ...headers,
+      ...options.headers || {},
     },
+    ...options
   }
   if (data) {
     options.body = JSON.stringify(data)
@@ -29,7 +32,7 @@ export const request = async (method: string, path: string, data: any = null, he
   }
   return {
     errors: await response.json()
-  }
+  } as unknown as TError
 }
 
-export type RequestResponse = ReturnType<typeof request>;
+export type RequestResponse = TError | Promise<Response>;
