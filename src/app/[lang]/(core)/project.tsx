@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import GitHubIcon from '@mui/icons-material/GitHub';
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import { Badge } from "@/components/ui/badge"
 import { TProject } from '@/types/project';
 
@@ -20,8 +20,8 @@ export default function Project({ data }: { data: TProject }) {
   return (
     <Card>
       <CardHeader className="pb-1">
-        <CardTitle>
-          <GitHubIcon className="mr-2"/>
+        <CardTitle className='flex flex-row'>
+          <GitHubLogoIcon className='mr-2' width="18" height="18" />
           {data.name}
         </CardTitle>
         <CardDescription>{data.url}</CardDescription>

@@ -3,7 +3,6 @@ import React, { useCallback, forwardRef } from "react";
 import { useForm } from "react-hook-form";
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form"
 import { zodResolver } from '@hookform/resolvers/zod';
-import { TError } from '@/utils/request';
 import { Dictionary } from '@/utils/get_dictionaries';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';

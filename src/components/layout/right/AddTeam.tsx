@@ -1,4 +1,4 @@
-import AddIcon from '@mui/icons-material/Add';
+import { PlusIcon } from '@radix-ui/react-icons';
 import { getCurrentDictionary } from '@/utils/get_dictionaries';
 import {
   Dialog,
@@ -16,8 +16,8 @@ export default async function AddTeam() {
     <div className='flex items-center'>
       <Dialog>
         <DialogTrigger className='h-6 w-6 rounded-full bg-gray-300'>
-          <div className='-mt-1'>
-            <AddIcon className="h-4 w-4" />
+          <div className='ml-1'>
+            <PlusIcon className="h-4 w-4" />
           </div>
         </DialogTrigger>
         <DialogContent>

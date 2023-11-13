@@ -1,7 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter as FontSans } from "next/font/google"
-import ThemeRegister from '@/components/ThemeRegister'
 import { cn } from '@/lib/utils';
 import { Toaster } from "@/components/ui/toaster"
 
@@ -22,17 +21,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full bg-white">
-      <ThemeRegister>
-        <body className={cn(
-          " min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
-        )}>
-          <div className='h-screen'>
-            {children}
-            <Toaster />
-          </div>
-        </body>
-      </ThemeRegister>
+      <body className={cn(
+        " min-h-screen bg-background font-sans antialiased",
+        fontSans.variable
+      )}>
+        <div className='h-screen'>
+          {children}
+          <Toaster />
+        </div>
+      </body>
     </html>
   )
 }

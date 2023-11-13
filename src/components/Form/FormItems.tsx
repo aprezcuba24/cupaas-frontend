@@ -3,7 +3,7 @@ import { useFieldArray, Controller } from 'react-hook-form';
 import { useFormContext } from "react-hook-form";
 import { Input } from '@/components/ui/input';
 import { Dictionary } from '@/utils/get_dictionaries';
-import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
+import { TrashIcon } from '@radix-ui/react-icons';
 import { MouseEventHandler, useRef, useEffect } from 'react';
 import BtnDashed from './BtnDashed';
 import { useFormField } from '@/components/ui/form';
@@ -52,8 +52,8 @@ const Row = ({ t, control, value, onRemove, name, Component, index, ...rest }: R
         name={name}
         control={control}
       />
-      <button onClick={onRemove} className='bg-blue-900 text-white rounded-full w-6 h-6 hover:bg-red-400'>
-        <DoDisturbOnIcon className='-mt-1'/>
+      <button onClick={onRemove} className='bg-blue-900 text-white rounded-full w-6 h-6 hover:bg-red-400 pl-1'>
+        <TrashIcon />
       </button>
     </div>
   )
