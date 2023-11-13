@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { TrashIcon } from "@radix-ui/react-icons";
 import { TProject } from '@/types/project';
 import { Dictionary } from '@/utils/get_dictionaries';
 import { useMemo, useState, useCallback } from 'react';
@@ -32,7 +32,7 @@ export default function RemoveProject({ project, t, removeProject }: RemoveProps
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="destructive" size="icon">
-          <DeleteForeverIcon  />
+          <TrashIcon  />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
