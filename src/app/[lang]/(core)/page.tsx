@@ -1,5 +1,4 @@
 import Project from './project';
-import { Input } from "@/components/ui/input"
 import { getDictionary } from '@/utils/get_dictionaries';
 import { PageParams } from '@/utils/types';
 import Link from 'next/link';
@@ -7,14 +6,22 @@ import { getProjects } from '@/services/project';
 import { TProject } from '@/types/project';
 import { ROUTE_NEW_PROJECT } from './[id]/new/page';
 import { Button } from '@/components/ui/button';
+import Search from './search';
 
-export default async function Home({ params: { lang } }: PageParams) {
+type HomeProps = {
+  searchParams: {
+    q: string,
+  }
+}
+
+export default async function Home({ params: { lang }, searchParams: { q } }: HomeProps & PageParams) {
   const t = await getDictionary(lang)
-  const projects: TProject[] = await getProjects()
+  const projects: TProject[] = await getProjects(q)
+
   return (
     <main>
       <div className='mb-5 flex justify-between'>
-        <Input placeholder={t.projects_list.search_placeholder} className='mr-1' />
+        <Search t={t} lang={lang} />
         <Button>
           <Link href={ROUTE_NEW_PROJECT}>{t.projects_list.btn_new}</Link>
         </Button>
