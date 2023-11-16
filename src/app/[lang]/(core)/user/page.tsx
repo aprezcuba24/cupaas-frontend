@@ -6,7 +6,7 @@ import { Row } from '@/components/Row';
 export default async function Page() {
   const user = await getCurrentUser();
   const t = await getCurrentDictionary()
-  console.log(user);
+
   return (
     <div>
       <Title>{t.account_page.title}</Title>

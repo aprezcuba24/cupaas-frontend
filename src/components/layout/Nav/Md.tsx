@@ -16,7 +16,7 @@ export default function NavMd() {
                 <Logo />
               </Link>
             </div>
-            <Menu />
+            {/* <Menu /> */}
           </div>
           <div className="hidden md:block">
             <div className="ml-4 flex items-center md:ml-6">
