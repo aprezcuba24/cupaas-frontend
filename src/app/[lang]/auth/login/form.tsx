@@ -13,7 +13,6 @@ type Props = {
 
 export default function Form({ t, action }: Props) {
   const [ { errors }, formAction ] = useServerForm(action);
-  console.log(errors);
 
   const footer = (
     <>

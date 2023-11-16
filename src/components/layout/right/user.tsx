@@ -20,7 +20,6 @@ const SIGN_OUT = 'sign_out'
 export default function UserStatus() {
   const { replace } = useRouter()
   const handleChange = useCallback(async (option: string) => {
-    console.log(option);
     if (option === SIGN_OUT) {
       await logout()
       return replace('/auth/login')

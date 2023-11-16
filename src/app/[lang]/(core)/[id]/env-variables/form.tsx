@@ -77,7 +77,6 @@ export default function FormEnvVariables({ projectId, t, branches, action, value
 
   const handleSubmit = useCallback(async (values: any) => {
     const response = await action(projectId, values)
-    console.log(response);
     if (response === true) {
       toast({
         title: t.message_toast.title_save,
