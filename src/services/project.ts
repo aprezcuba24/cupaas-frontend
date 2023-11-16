@@ -15,12 +15,12 @@ export const updateProject = async (id: string, project: Partial<TProject>) => {
   return response;
 }
 
-export const getProjects = async () => {
+export const getProjects = async (q='') => {
   const currentTeam = getCurrentTeam()
   return (
     await request(
       'GET',
-      `/api/teams/${currentTeam.id}/projects/`,
+      `/api/teams/${currentTeam.id}/projects/?q=${q}`,
       null,
       { next: { tags: ['projects'] } }
     ) as Response

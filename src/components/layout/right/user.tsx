@@ -14,35 +14,46 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { ArrowRightIcon } from "@radix-ui/react-icons"
+import { TUser } from '@/types/user';
+import { Keys, Dictionary } from '@/utils/get_dictionaries';
 
 const SIGN_OUT = 'sign_out'
+const SETTINGS = 'setting'
 
-export default function UserStatus() {
+type UserStatusProps = {
+  user: TUser
+  lang: Keys
+  t: Dictionary
+}
+
+export default function UserStatus({ user, lang, t }: UserStatusProps) {
   const { replace } = useRouter()
   const handleChange = useCallback(async (option: string) => {
-    console.log(option);
     if (option === SIGN_OUT) {
       await logout()
       return replace('/auth/login')
     }
-  }, [replace])
+    if (option === SETTINGS) {
+      return replace(`/${lang}/user`)
+    }
+  }, [replace, lang])
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="default">User name</Button>
+        <Button variant="default">{user.email}</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>{t.user_menu.my_account_title}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            Account settings
+          <DropdownMenuItem onClick={() => handleChange(SETTINGS)}>
+            {t.user_menu.user_settings}
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => handleChange(SIGN_OUT)}>
-          Log out
+          {t.user_menu.logout}
           <DropdownMenuShortcut>
             <ArrowRightIcon />
           </DropdownMenuShortcut>

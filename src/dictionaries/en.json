@@ -63,5 +63,15 @@
     "description": "Are you sure that you want remove this project? <br/> This process is irreversibly <br/><br/> Write the name of this project in the input.",
     "question": "Write the name of this project in the input.",
     "btn": "Remove"
+  },
+  "user_menu": {
+    "my_account_title": "My Account",
+    "user_settings": "Account settings",
+    "logout": "Log out"
+  },
+  "account_page": {
+    "title": "My Account Settings",
+    "email": "Email",
+    "name": "Name"
   }
 }
