@@ -62,5 +62,15 @@
     "title": "Eliminar el proyecto",
     "description": "¿Está seguro que quiere eliminar el proyecto? <br/> Este proceso es irreversible<br/><br/>Escriba el nombre del proyecto en el campo de texto.",
     "btn": "Eliminar"
+  },
+  "user_menu": {
+    "my_account_title": "Mis datos",
+    "user_settings": "Datos personales",
+    "logout": "Salir"
+  },
+  "account_page": {
+    "title": "Mi configuración de usuario",
+    "email": "Correo electrónico",
+    "name": "Nombre"
   }
 }
