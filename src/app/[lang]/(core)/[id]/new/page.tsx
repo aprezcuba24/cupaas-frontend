@@ -2,10 +2,7 @@ import { PageParams } from '@/utils/types';
 import { getDictionary } from '@/utils/get_dictionaries';
 import ProjectForm, { TFormProject } from '../form'
 import { createProject } from '@/services/project';
-import { redirect } from 'next/navigation';
 import { TProject } from '@/types/project';
-
-export const ROUTE_NEW_PROJECT = 'project/new'
 
 const InitialData: TFormProject = {
   name: "",

@@ -1,6 +1,6 @@
 import Menu from "./options"
 import { PropsWithChildren } from 'react';
-import { ROUTE_NEW_PROJECT } from "./new/page";
+import { ROUTE_NEW_PROJECT } from "./new/constants";
 import { getDictionary, Keys } from '@/utils/get_dictionaries';
 import { getProject, removeProject } from '@/services/project';
 import Header from './header';

@@ -1,0 +1,1 @@
+export const ROUTE_NEW_PROJECT = 'project/new'
