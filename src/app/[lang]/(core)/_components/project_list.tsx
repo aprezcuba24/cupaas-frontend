@@ -15,10 +15,12 @@ export type ProjectListProps = {
   q: string,
   lang: Keys,
   t: Dictionary,
+  setCurrentTeam?: () => Promise<void>;
+  hasCurrentTeam?: boolean
 }
 
-export default function ProjectList({ projects, q, t, lang }: ProjectListProps) {
-  const { loading, onChange, search } = useProjectList(q, lang)
+export default function ProjectList({ projects, q, t, lang, setCurrentTeam, hasCurrentTeam }: ProjectListProps) {
+  const { loading, onChange, search } = useProjectList(q, lang, setCurrentTeam, hasCurrentTeam)
 
   return (
     <WrapperList>

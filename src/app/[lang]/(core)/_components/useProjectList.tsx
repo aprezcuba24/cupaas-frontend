@@ -1,10 +1,15 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-export const useProjectList = (q: string, lang: string) => {
+export const useProjectList = (q: string, lang: string, setCurrentTeam?: () => Promise<void> , hasCurrentTeam?: boolean) => {
   const [loading, setLoading] = useState(false);
   const [timer, setTimer] = useState<any>(null);
   const [search, setSearch] = useState(q);
+  useEffect(() => {
+    if (!hasCurrentTeam) {
+      setCurrentTeam?.()
+    }
+  }, [hasCurrentTeam, setCurrentTeam])
 
   const { push } = useRouter()
   const onChange = useCallback(({ target: { value }}: React.ChangeEvent<HTMLInputElement>) => {

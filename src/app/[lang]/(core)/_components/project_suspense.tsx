@@ -5,10 +5,7 @@ import { getCurrentTeam, setDefaultTeam } from '@/services/team';
 
 export default async function ProjectListSuspense({ q, t, lang }: Omit<ProjectListProps, 'projects'>) {
   const currentTeam = getCurrentTeam()
-  if (!currentTeam.id) {
-    await setDefaultTeam()
-  }
-  const projects: TProject[] = await getProjects(q)
+  const projects: TProject[] = currentTeam.id? await getProjects(q) : [];
 
-  return <ProjectList projects={projects} q={q} t={t} lang={lang} />
+  return <ProjectList projects={projects} q={q} t={t} lang={lang} setCurrentTeam={setDefaultTeam} hasCurrentTeam={currentTeam.id} />
 }
