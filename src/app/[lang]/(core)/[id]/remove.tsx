@@ -44,7 +44,7 @@ export default function RemoveProject({ project, t, removeProject }: RemoveProps
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          <Input autocomplete="off" aria-autocomplete="none"  id="name" value={name} onChange={({ target: { value }}) => setName(value)} className="col-span-3" />
+          <Input autoComplete="off" aria-autocomplete="none"  id="name" value={name} onChange={({ target: { value }}) => setName(value)} className="col-span-3" />
         </div>
         <DialogFooter>
           <Button variant="destructive" disabled={btnDisable} onClick={handleRemove}>{t.remove_project.btn}</Button>

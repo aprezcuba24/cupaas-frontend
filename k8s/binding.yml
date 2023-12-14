@@ -1,0 +1,15 @@
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: sink-web
+  namespace: cupaas
+spec:
+  subject:
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    name: frontend
+  sink:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: backend

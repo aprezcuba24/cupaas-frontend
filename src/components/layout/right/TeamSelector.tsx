@@ -12,7 +12,7 @@ export default function TeamSelector({ currentTeam, teams }: { currentTeam: Team
   return (
     <div className='flex'>
       <div className='mr-1'>
-        <Select>
+        <Select name='team' onChange={() => {}} value={currentTeam.id}>
           <SelectTrigger className="w-[180px] text-white bg-gray-800 border-gray-800">
             <SelectValue placeholder={currentTeam.name}/>
           </SelectTrigger>

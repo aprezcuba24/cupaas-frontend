@@ -3,7 +3,8 @@ import { cookies } from 'next/headers';
 export type TError = Promise<{ errors: any }>
 
 export const request = async (method: string, path: string, data: any = null, options: RequestInit = {}) => {
-  const API_URL = process.env.API_URL
+  const API_URL = process.env.K_SINK || process.env.API_URL
+  console.log('API_URL =>', API_URL);
   data = data instanceof FormData ? Object.fromEntries(data) : data
   let defaultHeaders: any = {
     "Content-Type": "application/json",
