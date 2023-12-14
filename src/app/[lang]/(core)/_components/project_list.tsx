@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Dictionary, Keys } from '@/utils/get_dictionaries';
 import { ROUTE_NEW_PROJECT } from '../[id]/new/constants';
 import { Input } from '@/components/ui/input';
-import { ProjectListSuspense } from './suspense';
+import { ProjectListSkeleton } from './suspense';
 import { useProjectList } from './useProjectList';
 import WrapperList from './wrapper_list';
 
@@ -34,7 +34,7 @@ export default function ProjectList({ projects, q, t, lang }: ProjectListProps) 
           </Button>
       </>
       <>
-        {loading ? <ProjectListSuspense /> : (
+        {loading ? <ProjectListSkeleton /> : (
           <>
             {projects.map(({ id, ...rest }) => (
               <Link key={id}  href={`${id}/detail`}>

@@ -1,3 +1,4 @@
+'use client'
 import { Team } from '@/services/team';
 import {
   Select,
