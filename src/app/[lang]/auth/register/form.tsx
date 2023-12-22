@@ -11,7 +11,7 @@ type Props = {
 }
 
 export default function Form({ t, action }: Props) {
-  const [ { errors }, formAction ] = useServerForm(action);
+  const [ { errors }, formAction ] = useServerForm(action) as any; // TODO: check the errors field.
 
   const footer = (
     <Link href='/auth/login'>

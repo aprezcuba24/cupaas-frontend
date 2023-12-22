@@ -1,0 +1,12 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: cupaas
+spec:
+  template:
+    spec:
+      containers:
+        - image: aprezcuba24/cupaas-frontend:0.0.10
+          ports:
+            - containerPort: 3000
