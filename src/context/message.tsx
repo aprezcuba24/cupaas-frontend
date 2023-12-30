@@ -1,10 +1,12 @@
 'use client'
 import React, { createContext, useContext } from "react";
-import { PropsWithChildren, useEffect, useCallback } from 'react';
+import { PropsWithChildren, useCallback } from 'react';
 import { useToast } from '@/components/ui/use-toast';
+import { ToastAction } from "@/components/ui/toast"
 import { MercureConfiguration } from '@/types/mercure-configuration';
 import { useEventSource } from '../hooks/useEventSource';
 import { MessageEvent } from 'event-source-polyfill';
+import Link from 'next/link';
 
 const MessageContext = createContext({
   value: '',
@@ -14,21 +16,41 @@ type MessageContextProviderProps = {
   configuration?: MercureConfiguration
 } & PropsWithChildren
 
+//TODO: I need to implement translation for these messages.
+const ACTIONS_CONFIG = {
+  DEPLOY_STARTED: {
+    title: 'Ha comenzado un despliegue',
+    description: (name: string) => `Desplegando el proyecto ${name}`
+  },
+  DEPLOY_ENDED: {
+    title: 'Ha terminado un despliegue',
+    description: (name: string) => `Desplegado el proyecto ${name}`
+  }
+}
+const ACTIONS = Object.keys(ACTIONS_CONFIG)
+type ActionKey = keyof typeof ACTIONS_CONFIG
+
 export const MessageContextProvider = ({ children, configuration, ...props }: MessageContextProviderProps) => {
   const { toast } = useToast();
-  // useEffect(() => {
-  //   const time =setInterval(() => {
-  //     toast({
-  //       title: 'message',
-  //       description: 'hello',
-  //       variant: 'success',
-  //     })
-  //   }, 5000);
-  //   return () => clearInterval(time);
-  // }, [toast])
   const handlerMessage = useCallback((event: MessageEvent) => {
-    console.log(event);
-  }, []);
+    if (ACTIONS.includes(event.data.action)) {
+      const { action, data } = event.data
+      console.log(action, data);
+      const config = ACTIONS_CONFIG[action as ActionKey]
+      toast({
+        title: config.title,
+        description: config.description(data.name),
+        variant: 'success',
+        action: (
+          <ToastAction altText="deploy">
+            <Link key={data.id}  href={`/${data.id}/detail`}>
+              Logs
+            </Link>
+          </ToastAction>
+        ),
+      })
+    }
+  }, [toast]);
   useEventSource(handlerMessage, configuration)
   return (
     <MessageContext.Provider {...props} value={{
