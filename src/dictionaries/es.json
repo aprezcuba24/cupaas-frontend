@@ -52,7 +52,8 @@
   "project_menu": {
     "env_variables": "Environment Variables",
     "create": "Create",
-    "detail": "Detail"
+    "detail": "Detail",
+    "deploys": "Deploys"
   },
   "env_variable": {
     "title": "Gestionar Variables de Entorno.",
@@ -72,5 +73,14 @@
     "title": "Mi configuración de usuario",
     "email": "Correo electrónico",
     "name": "Nombre"
+  },
+  "deploy": {
+    "title": "Deploys",
+    "title_single": "Deploy",
+    "branch": "Branch",
+    "date": "Fecha",
+    "steps": "Deploy steps",
+    "status": "Status",
+    "commit": "Commit"
   }
 }

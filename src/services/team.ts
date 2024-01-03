@@ -25,3 +25,8 @@ export const getCurrentTeam = () => {
   const team = cookies().get('team')?.value
   return team ? JSON.parse(team) : {}
 }
+
+export const getMercureConfig = async (team: Team) => {
+  const data = await (await request('GET', `/api/teams/${team.id}/mercure/`) as Response).json()
+  return { ...data, topics: JSON.parse(data.topics) }
+}
