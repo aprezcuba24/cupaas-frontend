@@ -75,6 +75,12 @@
     "name": "Nombre"
   },
   "deploy": {
-    "title": "Deploys"
+    "title": "Deploys",
+    "title_single": "Deploy",
+    "branch": "Branch",
+    "date": "Fecha",
+    "steps": "Deploy steps",
+    "status": "Status",
+    "commit": "Commit"
   }
 }

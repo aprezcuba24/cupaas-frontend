@@ -3,5 +3,6 @@ export type IDeploy = {
   ref: string;
   created_at: Date;
   updated_at: Date;
-  status: string
+  status: string;
+  steps: any;
 }

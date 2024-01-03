@@ -50,19 +50,28 @@ const OptionLiStyle = (active = false, enabled = true) => `
   ${active && 'border-r-4 border-r-blue-900'}
 `
 
-export default function Menu({ t }: { t: Dictionary }) {
+type MenuProps = {
+  t: Dictionary,
+  id: string,
+  lang: string,
+}
+
+export default function Menu({ t, id, lang }: MenuProps) {
   const pathname = usePathname()
   const isNewPage = pathname.endsWith('/new')
   const options = isNewPage ? [NewOption, ...Options(false)] : [DetailOption, ...Options()]
   return (
     <ul className="flex flex-col">
-      {options.map(({ label, value, enabled }) => (
-        <li key={value}>
-          <Link className={OptionLiStyle(pathname.includes(value), enabled)} href={enabled ? value : '#'}>
-            {t.project_menu[label]}
-          </Link>
-        </li>
-      ))}
+      {options.map(({ label, value, enabled }) => {
+        const link = `/${lang}/${id}/${value}`
+        return (
+          <li key={value}>
+            <Link className={OptionLiStyle(pathname.includes(value), enabled)} href={enabled ? link : '#'}>
+              {t.project_menu[label]}
+            </Link>
+          </li>
+        )
+      })}
     </ul>
   )
 }

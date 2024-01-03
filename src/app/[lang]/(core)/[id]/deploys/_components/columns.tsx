@@ -2,24 +2,17 @@
  
 import { ColumnDef } from "@tanstack/react-table"
 import { IDeploy } from '@/types/deploy';
-import { Badge } from '@/components/ui/badge';
+import { ArrowRightIcon } from '@radix-ui/react-icons';
+import VariantBadge from "./variant-badge";
+import Link from 'next/link';
 
 export const columns: ColumnDef<IDeploy>[] = [
   {
     accessorKey: "status",
     header: "Status",
-    cell: ({ row }) => {
-      const variants: Record<string, 'secondary' | 'outline' | 'destructive'> = {
-        PROCESSING: 'secondary',
-        DEPLOYED: 'outline',
-        ABORTED: 'destructive',
-      }
-      const status: keyof typeof variants = row.getValue("status")
-      const variant = variants[status]
-      return (
-        <Badge variant={variant}>{row.getValue("status")}</Badge>
-      )
-    },
+    cell: ({ row }) => (
+      <VariantBadge>{row.getValue("status")}</VariantBadge>
+    ),
   },
   {
     accessorKey: "ref",
@@ -28,5 +21,14 @@ export const columns: ColumnDef<IDeploy>[] = [
   {
     accessorKey: "created_at",
     header: "CreatedAt",
+  },
+  {
+    accessorKey: "id",
+    header: "",
+    cell: ({ row }) => (
+      <Link href={`deploys/${row.getValue("id")}/detail`}>
+        <ArrowRightIcon />
+      </Link>
+    ),
   },
 ]

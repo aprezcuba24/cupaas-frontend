@@ -26,7 +26,7 @@ export default async function Layout({ children, params: { id, lang } }: LayoutP
   return (
     <div className="flex h-full">
       <div className="w-60 p-2 pt-6 bg-gray-100 h-full rounded mr-5">
-        <Menu t={t}/>
+        <Menu t={t} id={id} lang={lang} />
       </div>
       <div className="w-full h-full">
         <Header
