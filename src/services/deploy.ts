@@ -13,3 +13,10 @@ export const getDeploy = async (projectId: string, id: string) => {
   const entity = await (await request('GET', `/api/teams/${currentTeam.id}/projects/${projectId}/deploys/${id}`) as Response).json()
   return convert_dates(entity)
 }
+
+export const getDeployMercure = async (projectId: string, id: string) => {
+  const currentTeam = getCurrentTeam()
+  const config = await (await request('GET', `/api/teams/${currentTeam.id}/projects/${projectId}/deploys/${id}/mercure`) as Response).json()
+  config.topics = JSON.parse(config.topics)
+  return config;
+}
