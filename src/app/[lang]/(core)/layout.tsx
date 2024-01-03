@@ -11,7 +11,7 @@ export default async function DashboardLayout({
   children: React.ReactNode
 }) {
   const currentTeam = getCurrentTeam()
-  const configuration = currentTeam ? await getMercureConfig(currentTeam): null;
+  const configuration = currentTeam && currentTeam.id ? await getMercureConfig(currentTeam): null;
 
   return (
     <MessageContextProvider configuration={configuration}>

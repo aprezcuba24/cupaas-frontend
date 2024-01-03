@@ -8,6 +8,11 @@ const Options = (enabled=true): Option[] => ([
     enabled,
     label: 'env_variables',
     value: 'env-variables',
+  },
+  {
+    enabled,
+    label: 'deploys',
+    value: 'deploys',
   }
 ])
 
