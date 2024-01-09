@@ -38,11 +38,11 @@ export const MessageContextProvider = ({ children, configuration, ...props }: Me
       const config = ACTIONS_CONFIG[action as ActionKey]
       toast({
         title: config.title,
-        description: config.description(data.name),
+        description: config.description(data.project.name),
         variant: 'success',
         action: (
           <ToastAction altText="deploy">
-            <Link key={data.id}  href={`/${data.id}/detail`}>
+            <Link key={data.id}  href={`/${data.project.id}/deploys`}>
               Logs
             </Link>
           </ToastAction>

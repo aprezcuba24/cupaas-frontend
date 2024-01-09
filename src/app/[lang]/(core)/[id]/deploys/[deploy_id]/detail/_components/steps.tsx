@@ -53,7 +53,7 @@ const StepRow = ({ value, pendingIcon }: { value: any, pendingIcon: any }) => {
 
 export default function Steps({ t, deploy, mercure }: StepsProps) {
   const [currentDeploy, setCurrentDeploy] = useState(deploy)
-  const steps = Object.entries(currentDeploy.steps)
+  const steps = Object.entries(currentDeploy.step_ordered)
   const hasOneAborted = steps.reduce((acc, [_, value]: [any, any]) => {
     if (value["STATUS"] === 'ABORTED') {
       return true

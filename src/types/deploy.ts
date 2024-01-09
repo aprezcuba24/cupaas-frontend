@@ -4,5 +4,5 @@ export type IDeploy = {
   created_at: Date;
   updated_at: Date;
   status: string;
-  steps: any;
+  step_ordered: any;
 }
