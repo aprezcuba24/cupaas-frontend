@@ -19,6 +19,10 @@ export const columns: ColumnDef<IDeploy>[] = [
     header: "Branch",
   },
   {
+    accessorKey: "commit_message",
+    header: "Commit message",
+  },
+  {
     accessorKey: "created_at",
     header: "CreatedAt",
   },
