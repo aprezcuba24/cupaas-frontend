@@ -5,4 +5,5 @@ export type IDeploy = {
   updated_at: Date;
   status: string;
   step_ordered: any;
+  commit_message: string;
 }

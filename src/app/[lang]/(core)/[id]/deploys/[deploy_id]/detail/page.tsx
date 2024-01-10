@@ -24,7 +24,7 @@ export default async function Page({ params: { id, deploy_id } }: PageProps) {
       </Row>
       <Row label={t.deploy.branch}>{deploy.ref}</Row>
       <Row label={t.deploy.date}>{deploy.created_at.toString()}</Row>
-      <Row label={t.deploy.commit}>commit...</Row>
+      <Row label={t.deploy.commit}>{deploy.commit_message}</Row>
       <Steps t={t} deploy={deploy} mercure={mercure} />
     </div>
   )
