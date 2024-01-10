@@ -42,8 +42,8 @@ export const MessageContextProvider = ({ children, configuration, ...props }: Me
         variant: 'success',
         action: (
           <ToastAction altText="deploy">
-            <Link key={data.id}  href={`/${data.project.id}/deploys`}>
-              Logs
+            <Link key={data.id}  href={`/${data.project.id}/deploys/${data.deploy.id}/detail`}>
+              Deploy
             </Link>
           </ToastAction>
         ),

@@ -2,10 +2,7 @@
 import { Dictionary } from '@/utils/get_dictionaries';
 import { IDeploy } from '@/types/deploy';
 import { CheckIcon, Cross1Icon, PaperPlaneIcon, ReloadIcon } from '@radix-ui/react-icons';
-import { useState, useCallback } from 'react';
 import { MercureConfiguration } from '@/types/mercure-configuration';
-import { useEventSource } from '@/hooks/useEventSource';
-import { MessageEvent } from 'event-source-polyfill';
 
 type StepsProps = {
   t: Dictionary,
@@ -51,20 +48,15 @@ const StepRow = ({ value, pendingIcon }: { value: any, pendingIcon: any }) => {
   )
 };
 
-export default function Steps({ t, deploy, mercure }: StepsProps) {
-  const [currentDeploy, setCurrentDeploy] = useState(deploy)
-  const steps = Object.entries(currentDeploy.step_ordered)
+export default function Steps({ t, deploy }: StepsProps) {
+  const steps = Object.entries(deploy.step_ordered)
   const hasOneAborted = steps.reduce((acc, [_, value]: [any, any]) => {
     if (value["STATUS"] === 'ABORTED') {
       return true
     }
     return acc
   }, false)
-  const handleMercure = useCallback((event: MessageEvent) => {
-    const { data: { data } } = event;
-    setCurrentDeploy(data)
-  }, [])
-  useEventSource(handleMercure, mercure)
+  
   return (
     <>
       <h2 className='mb-5'>{t.deploy.steps}</h2>
